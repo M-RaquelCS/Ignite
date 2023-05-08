@@ -13,7 +13,7 @@ export function Sidebar(){
             <div className={styles.profile}>
                 <img 
                     src="https://github.com/M-RaquelCS.png" 
-                    alt=""
+                    alt="imagem do usuário escolhido pelo mesmo"
                 />
 
                 <strong>Maria Raquel</strong>
