@@ -1,3 +1,4 @@
+import { Avatar } from "../Avatar"
 import { Comment } from "../Comment"
 
 import styles from "./styles.module.scss"
@@ -7,10 +8,7 @@ export function Post(){
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <img 
-                        src="https://github.com/M-RaquelCS.png" 
-                        alt="imagem do usuário escolhido pelo mesmo"
-                    />
+                    <Avatar hasBorders={true} src={"https://github.com/M-RaquelCS.png"} />
                     <div className={styles.authorInfo}>
                         <strong>Maria Raquel</strong>
                         <span>Software Engineer</span>

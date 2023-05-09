@@ -1,3 +1,4 @@
+import { Avatar } from "../Avatar"
 import styles from "./styles.module.scss"
 
 import { PencilSimpleLine } from "@phosphor-icons/react"
@@ -11,10 +12,7 @@ export function Sidebar(){
                 className={styles.cover}
             />
             <div className={styles.profile}>
-                <img 
-                    src="https://github.com/M-RaquelCS.png" 
-                    alt="imagem do usuário escolhido pelo mesmo"
-                />
+                <Avatar hasBorders={true} src="https://github.com/M-RaquelCS.png" />
 
                 <strong>Maria Raquel</strong>
                 <span>Software Engineer</span>
