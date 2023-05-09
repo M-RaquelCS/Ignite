@@ -42,6 +42,16 @@ export function Post({ author, content, publishedAt } : PostProps) {
         console.log(comments)
     }
 
+    function handleDeleteComment(commentToDelete: string){
+        const commentsWithoutDeleteOne = comments.filter(comment => {
+            return comment !== commentToDelete
+        })
+        console.log(commentToDelete)
+        // setComment(commentsWithoutDeleteOne)
+    }
+
+    const isCommentEmpty = comment.length === 0;
+
     return (
         <article className={styles.post}>
             <header>
@@ -63,7 +73,9 @@ export function Post({ author, content, publishedAt } : PostProps) {
                         )
                     } else if (line.type === 'link'){
                         return(
-                            <a href="#" key={index}>{line.content}</a>
+                            <p key={index} >
+                                <a href="#">{line.content}</a>
+                            </p>
                         )
                     }
                 })}
@@ -76,17 +88,23 @@ export function Post({ author, content, publishedAt } : PostProps) {
                     value={comment}
                     onChange={(event) => setComment(event.target.value)} 
                     placeholder="Deixe seu feedback"
+                    required
                 />
 
                 <footer>
-                    <button type="submit">Publicar</button>
+                    <button 
+                        type="submit"
+                        disabled={isCommentEmpty}
+                    >
+                        Publicar
+                    </button>
                 </footer>
             </form>
 
             <div className={styles.commentList}>
-                {comments.map((comment, index) => {
+                {comments.map((comment) => {
                     return (
-                        <Comment key={index} comment={comment} />
+                        <Comment key={comment} comment={comment} deleteComment={handleDeleteComment} />
                     )
                 })}
             </div>
