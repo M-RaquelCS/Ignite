@@ -1,3 +1,4 @@
+import { FormEvent, useState } from "react"
 import { Avatar } from "../Avatar"
 import { Comment } from "../Comment"
 
@@ -16,6 +17,7 @@ interface PostProps {
     publishedAt: Date;
 }
 
+
 export function Post({ author, content, publishedAt } : PostProps) {
 
     const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'ás' HH:mm'h'", {
@@ -27,6 +29,17 @@ export function Post({ author, content, publishedAt } : PostProps) {
         addSuffix: true
 
     })
+
+    const [comments, setComments] = useState([
+        1,
+        2,
+    ])
+
+    function handleSubmitNewComment(event: FormEvent){
+        event.preventDefault()
+        setComments([...comments, comments.length + 1 ])
+        console.log(comments)
+    }
 
     return (
         <article className={styles.post}>
@@ -55,7 +68,7 @@ export function Post({ author, content, publishedAt } : PostProps) {
                 })}
             </div>
 
-            <form className={styles.commentForm}>
+            <form onSubmit={handleSubmitNewComment} className={styles.commentForm}>
                 <strong>Deixe seu feedback</strong>
 
                 <textarea placeholder="Deixe seu feedback" />
@@ -66,9 +79,11 @@ export function Post({ author, content, publishedAt } : PostProps) {
             </form>
 
             <div className={styles.commentList}>
-                <Comment />
-                <Comment />
-                <Comment />
+                {comments.map((comment, index) => {
+                    return (
+                        <Comment key={index} />
+                    )
+                })}
             </div>
         </article>
     )
