@@ -1,6 +1,6 @@
-import styles from "./styles.module.scss"
+import { Comment } from "../Comment"
 
-// lbvbrasil
+import styles from "./styles.module.scss"
 
 export function Post(){
     return (
@@ -45,6 +45,12 @@ export function Post(){
                     <button type="submit">Publicar</button>
                 </footer>
             </form>
+
+            <div className={styles.commentList}>
+                <Comment />
+                <Comment />
+                <Comment />
+            </div>
         </article>
     )
 }
