@@ -30,14 +30,15 @@ export function Post({ author, content, publishedAt } : PostProps) {
 
     })
 
-    const [comments, setComments] = useState([
-        1,
-        2,
-    ])
+    const [comments, setComments] = useState<string[]>([])
+    
+    const [comment, setComment] = useState('')
 
-    function handleSubmitNewComment(event: FormEvent){
+
+    function handleSubmitNewComment(event: FormEvent<HTMLFormElement>){
         event.preventDefault()
-        setComments([...comments, comments.length + 1 ])
+        setComments([...comments, comment ])
+        setComment('')
         console.log(comments)
     }
 
@@ -71,7 +72,11 @@ export function Post({ author, content, publishedAt } : PostProps) {
             <form onSubmit={handleSubmitNewComment} className={styles.commentForm}>
                 <strong>Deixe seu feedback</strong>
 
-                <textarea placeholder="Deixe seu feedback" />
+                <textarea
+                    value={comment}
+                    onChange={(event) => setComment(event.target.value)} 
+                    placeholder="Deixe seu feedback"
+                />
 
                 <footer>
                     <button type="submit">Publicar</button>
@@ -81,7 +86,7 @@ export function Post({ author, content, publishedAt } : PostProps) {
             <div className={styles.commentList}>
                 {comments.map((comment, index) => {
                     return (
-                        <Comment key={index} />
+                        <Comment key={index} comment={comment} />
                     )
                 })}
             </div>
