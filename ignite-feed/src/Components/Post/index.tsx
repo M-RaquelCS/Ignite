@@ -13,7 +13,7 @@ interface PostProps {
         name: string;
         role: string;
     },
-    content: { type: string; content: string; }[],
+    content: { type: 'paragraph' | 'link'; content: string; }[],
     publishedAt: Date;
 }
 
