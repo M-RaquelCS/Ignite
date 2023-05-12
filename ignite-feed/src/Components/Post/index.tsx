@@ -43,11 +43,12 @@ export function Post({ author, content, publishedAt } : PostProps) {
     }
 
     function handleDeleteComment(commentToDelete: string){
-        const commentsWithoutDeleteOne = comments.filter(comment => {
+        const commentsWithoutDeleteOne: string[] = comments.filter(comment => {
             return comment !== commentToDelete
         })
-        console.log(commentToDelete)
-        // setComment(commentsWithoutDeleteOne)
+        const commentsWithoutDeleteOneString = commentsWithoutDeleteOne.join(' '); // Converte o array em uma única string
+        setComments([commentsWithoutDeleteOneString]);
+        // console.log(commentsWithoutDeleteOneString)
     }
 
     const isCommentEmpty = comment.length === 0;
