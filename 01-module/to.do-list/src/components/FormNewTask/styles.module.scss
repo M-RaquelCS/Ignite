@@ -1,0 +1,35 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: (0px - 27px); // ou -27px
+
+  gap: 0.5rem;
+
+  input {
+    padding: 1rem;
+
+    border: 1px solid var(--gray-700);
+    border-radius: 8px;
+
+    width: 100%;
+    max-width: 40rem;
+
+    color: var(--gray-100);
+  }
+
+  button {
+    padding: 1rem;
+
+    display: flex;
+    align-items: center;
+
+    gap: 0.5rem;
+
+    border: none;
+    border-radius: 8px;
+
+    background: var(--blue);
+  }
+}
