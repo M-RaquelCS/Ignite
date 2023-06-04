@@ -7,15 +7,24 @@ import { ITasks } from '../../App'
 type TasksProps = {
   tasks: ITasks[],
   handleRemoveTask: (id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-  handleToggleTaskCompletion: (id: number, event: React.MouseEvent<HTMLLabelElement, MouseEvent>) => void
+  handleToggleTaskCompletion: (id: number, event: React.MouseEvent<HTMLLabelElement, MouseEvent>) => void,
+  totalTasks: number,
+  totalCompletedTasks: number
 }
 
-export function Tasks({ tasks, handleRemoveTask, handleToggleTaskCompletion }: TasksProps){
+export function Tasks({ tasks, handleRemoveTask, handleToggleTaskCompletion, totalCompletedTasks,totalTasks }: TasksProps){
+
   return (
     <div className={styles.content}>
       <header>
-        <strong>Tarefas Criadas</strong>
-        <strong>Concluídas</strong>
+        <div>
+          <strong>Tarefas Criadas</strong>
+          <p className={styles.quantity}>{totalTasks}</p>
+        </div>
+        <div>
+          <strong>Concluídas</strong>
+          <p className={styles.quantity}>{totalCompletedTasks + ' de ' + totalTasks}</p>
+        </div>
       </header>
       <main>
         {tasks.length == 0 ? (

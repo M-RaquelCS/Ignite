@@ -18,6 +18,9 @@ function App() {
   const [newTitle, setNewTitle] = useState('')
   const [tasks, setTasks] = useState<ITasks[]>([])
 
+  const totalTasks = tasks.length
+  const totalCompletedTasks = tasks.filter((task) => task.isCompleted === true).length;
+
   function handleCreateNewTask(event: React.MouseEvent<HTMLButtonElement, MouseEvent>){
     event.preventDefault();
 
@@ -70,7 +73,13 @@ function App() {
       />
       <Header />
       <FormNewTask handleCreateNewTask={handleCreateNewTask} setNewTitle={setNewTitle} />
-      <Tasks tasks={tasks} handleRemoveTask={handleRemoveTask} handleToggleTaskCompletion={handleToggleTaskCompletion}/>
+      <Tasks 
+        tasks={tasks} 
+        totalTasks={totalTasks}
+        totalCompletedTasks={totalCompletedTasks}
+        handleRemoveTask={handleRemoveTask} 
+        handleToggleTaskCompletion={handleToggleTaskCompletion}
+      />
     </>
   )
 }
