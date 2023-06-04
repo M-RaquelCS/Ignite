@@ -52,6 +52,12 @@
       path {
         color: var(--gray-300);
       }
+
+      &:hover {
+        path {
+          color: var(--red)
+        }
+      }
     }
   }
 }

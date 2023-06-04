@@ -1,9 +1,15 @@
+import { Task } from '../Task'
 import styles from './styles.module.scss'
 
 import clipboardImg from '../../assets/Clipboard.png'
-import { Task } from '../Task'
+import { ITasks } from '../../App'
 
-export function Tasks(){
+type TasksProps = {
+  tasks: ITasks[],
+  handleRemoveTask: (id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+}
+
+export function Tasks({ tasks, handleRemoveTask }: TasksProps){
   return (
     <div className={styles.content}>
       <header>
@@ -11,17 +17,26 @@ export function Tasks(){
         <strong>Concluídas</strong>
       </header>
       <main>
-        <ul>
-          <Task />
-          <Task />
-          <Task />
-          <Task />
-        </ul>
-        <div className={styles.noTasks}>
-          <img src={clipboardImg} alt="imagem de uma prancheta" />
-          <strong>Você ainda não tem tarefas cadastradas</strong>
-          <span>Crie tarefas e organize seus itens a fazer</span>
-        </div>
+        {tasks.length == 0 ? (
+          <div className={styles.noTasks}>
+            <img src={clipboardImg} alt="imagem de uma prancheta" />
+            <strong>Você ainda não tem tarefas cadastradas</strong>
+            <span>Crie tarefas e organize seus itens a fazer</span>
+          </div>
+        ) : (
+          <ul>
+            {tasks.map(task =>(
+                <Task 
+                  key={task.id} 
+                  id={task.id} 
+                  title={task.title} 
+                  isCompleted={task.isCompleted} 
+                  handleRemoveTask={handleRemoveTask}
+                />
+            ))}
+          </ul>
+        )}
+        
       </main>
     </div>
   )
