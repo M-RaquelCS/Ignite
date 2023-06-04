@@ -5,15 +5,16 @@ type TaskProps = {
   id: number,
   title: string,
   isCompleted: boolean,
-  handleRemoveTask: (id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  handleRemoveTask: (id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  handleToggleTaskCompletion: (id: number, event: React.MouseEvent<HTMLLabelElement, MouseEvent>) => void
 }
 
-export function Task({ id, title, isCompleted, handleRemoveTask }: TaskProps){
+export function Task({ id, title, isCompleted, handleRemoveTask, handleToggleTaskCompletion }: TaskProps){
   return (
-    <li className={isCompleted == false ? styles.task : styles.isCompleted} key={id}>
+    <li className={isCompleted ? styles.isCompleted : styles.task} key={id}>
       <div className={styles.checkbox}>
-        <input type="checkbox" id="myCheckbox" />
-        <label className={styles.myCheckbox}></label>
+        <input type="checkbox" id="myCheckbox" checked={isCompleted} readOnly/>
+        <label className={styles.myCheckbox} onClick={(event) => handleToggleTaskCompletion(id, event)}></label>
       </div>
       <p>{title}</p>
       <button type='button' onClick={(event) => handleRemoveTask(id, event)}>

@@ -6,10 +6,11 @@ import { ITasks } from '../../App'
 
 type TasksProps = {
   tasks: ITasks[],
-  handleRemoveTask: (id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  handleRemoveTask: (id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  handleToggleTaskCompletion: (id: number, event: React.MouseEvent<HTMLLabelElement, MouseEvent>) => void
 }
 
-export function Tasks({ tasks, handleRemoveTask }: TasksProps){
+export function Tasks({ tasks, handleRemoveTask, handleToggleTaskCompletion }: TasksProps){
   return (
     <div className={styles.content}>
       <header>
@@ -32,6 +33,7 @@ export function Tasks({ tasks, handleRemoveTask }: TasksProps){
                   title={task.title} 
                   isCompleted={task.isCompleted} 
                   handleRemoveTask={handleRemoveTask}
+                  handleToggleTaskCompletion = {handleToggleTaskCompletion}
                 />
             ))}
           </ul>

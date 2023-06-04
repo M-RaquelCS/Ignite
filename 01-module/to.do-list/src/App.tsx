@@ -35,6 +35,17 @@ function App() {
 
   }
 
+  function handleToggleTaskCompletion(id: number, event: React.MouseEvent<HTMLLabelElement, MouseEvent>) {
+    event.preventDefault();
+
+    const finishedTask = tasks.map(task => task.id === id ? {
+      ...task,
+      isCompleted: !task.isCompleted
+    }: task)
+
+    setTasks(finishedTask)
+  }
+
   function handleRemoveTask(id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     event.preventDefault()
     setTasks(tasks.filter(task => task.id !== id))
@@ -44,7 +55,7 @@ function App() {
     <>
       <Header />
       <FormNewTask handleCreateNewTask={handleCreateNewTask} setNewTitle={setNewTitle} />
-      <Tasks tasks={tasks} handleRemoveTask={handleRemoveTask} />
+      <Tasks tasks={tasks} handleRemoveTask={handleRemoveTask} handleToggleTaskCompletion={handleToggleTaskCompletion}/>
     </>
   )
 }
