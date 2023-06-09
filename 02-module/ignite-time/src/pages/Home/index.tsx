@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 
 import { HandPalm, Play } from 'phosphor-react'
+
 import {
   CountdownContainer,
   FormContainer,
@@ -13,6 +14,7 @@ import {
   StartCountdownButton,
   TaskInput,
 } from './styles'
+
 import { useEffect, useState } from 'react'
 import { differenceInSeconds } from 'date-fns'
 
