@@ -27,7 +27,6 @@ export const HeaderContainer = styled.header`
         color: ${(props) => props.theme['purple-700']};
 
         font-size: 14px;
-        line-height: 130%;
 
         svg {
           color: ${(props) => props.theme['purple-500']};

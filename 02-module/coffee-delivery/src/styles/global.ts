@@ -15,10 +15,12 @@ export const GlobalStyle = createGlobalStyle`
   body, input, textarea, button {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
+    line-height: 130%;
   }
 
   h1,h2,h3,h4,h5,h6 {
     font-family: 'Baloo 2', sans-serif;
+    line-height: 130%;
   }
 
   body {
