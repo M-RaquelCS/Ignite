@@ -20,4 +20,10 @@ export const GlobalStyle = createGlobalStyle`
   h1,h2,h3,h4,h5,h6 {
     font-family: 'Baloo 2', sans-serif;
   }
+
+  body {
+    background: ${(props) => props.theme['gray-100']};
+    color: ${(props) => props.theme['brown-500']};
+    -webkit-font-smoothing: antialiased;
+  }
 `
