@@ -7,6 +7,8 @@ export const IntroContainer = styled.div`
   align-items: center;
   justify-content: center;
 
+  padding-inline: 0.8rem;
+
   gap: 3.5rem;
 
   height: 544px;
