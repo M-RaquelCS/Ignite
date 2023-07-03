@@ -98,6 +98,10 @@ export const ShoppingButton = styled.button`
 
   background-color: ${(props) => props.theme['purple-700']};
 
+  transition: background-color 0.25s;
+  &:hover {
+    background-color: ${(props) => props.theme['purple-500']};
+  }
   svg {
     color: ${(props) => props.theme['gray-200']};
   }
