@@ -19,4 +19,5 @@ export const defaultTheme = {
   'gray-300': '#EDEDED',
   'gray-200': '#F3F2F2',
   'gray-100': '#FAFAFA',
+  'gradient-500': 'linear-gradient(103deg, #dbac2c 0%, #8047f8 100%)',
 }

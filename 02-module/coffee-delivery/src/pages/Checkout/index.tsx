@@ -26,7 +26,7 @@ export function Checkout() {
   const [typePayment, SetTypePayment] = useState('')
 
   return (
-    <CheckoutContainer action="">
+    <CheckoutContainer>
       <section>
         <h1>Complete seu pedido</h1>
 

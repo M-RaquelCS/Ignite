@@ -18,7 +18,7 @@ export function Header() {
           <MapPin size={22} weight="fill" />
           Belo Jardim, PE
         </NavLink>
-        <NavLink to="/checkout" title="Carrinho">
+        <NavLink to="/success" title="Carrinho">
           <ShoppingCart size={22} weight="fill" />
         </NavLink>
       </nav>
