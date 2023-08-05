@@ -10,8 +10,24 @@ import {
   Tags,
 } from './styles'
 import { coffees } from '../../../../utils/coffees'
+import { IItemCart, useCart } from '../../../../contexts/StoreContext'
+import { useState } from 'react'
 
-export function CoffeeList() {
+export function CoffeeList(item: IItemCart) {
+  const { addProduct } = useCart()
+
+  const [quantity, setQuantity] = useState(1)
+
+  function handleAddProductToCart() {
+    const data = {
+      ...item,
+      quantity,
+    }
+    console.log(data)
+    addProduct(data)
+    setQuantity(1)
+  }
+
   return (
     <>
       <h1>Nossos cafés</h1>
@@ -25,7 +41,6 @@ export function CoffeeList() {
                 {coffee.tags.map((tag) => {
                   return <span key={tag}>{tag}</span>
                 })}
-                <span>gelado</span>
               </Tags>
 
               <DescriptionCoffee>
@@ -44,7 +59,10 @@ export function CoffeeList() {
                     placeholder="1"
                     min={1}
                   />
-                  <ShoppingButton type="button">
+                  <ShoppingButton
+                    type="button"
+                    onClick={handleAddProductToCart}
+                  >
                     <ShoppingCart size={22} weight="fill" />
                   </ShoppingButton>
                 </BuyActions>

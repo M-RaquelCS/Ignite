@@ -22,6 +22,10 @@ import {
 import { useState } from 'react'
 import { CardCoffee } from './components/CardCoffee'
 
+// import * as zod from 'zod'
+
+// const newOrderFormValidationSchema = zod.object({})
+
 export function Checkout() {
   const [typePayment, SetTypePayment] = useState('')
 
