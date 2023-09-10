@@ -71,7 +71,7 @@ export const CEPInput = styled(Input)`
 `
 
 interface ButtonPaymentMethodsProps {
-  isActive: boolean
+  isactive: boolean
 }
 
 export const PaymentMethods = styled.div`
@@ -92,12 +92,12 @@ export const ButtonPaymentMethods = styled.button<ButtonPaymentMethodsProps>`
   border-radius: 0.375rem;
 
   background-color: ${(props) =>
-    props.isActive ? props.theme['purple-300'] : props.theme['gray-400']};
+    props.isactive ? props.theme['purple-300'] : props.theme['gray-400']};
 
   color: ${(props) => props.theme['brown-500']};
 
   border: 1px solid
-    ${(props) => (props.isActive ? props.theme['purple-700'] : 0)};
+    ${(props) => (props.isactive ? props.theme['purple-700'] : 0)};
 
   &:active {
     border: 1px solid ${(props) => props.theme['purple-700']};

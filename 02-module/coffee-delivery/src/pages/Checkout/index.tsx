@@ -22,15 +22,49 @@ import {
 import { useState } from 'react'
 import { CardCoffee } from './components/CardCoffee'
 
-// import * as zod from 'zod'
+import * as zod from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-// const newOrderFormValidationSchema = zod.object({})
+const newOrderFormValidationSchema = zod.object({
+  cep: zod.string().min(1, 'Informe um CEP.'),
+  street: zod.string().min(1, 'Informe o nome de sua rua.'),
+  number: zod.number(),
+  neighborhood: zod.string().min(1, 'Informe o nome do seu bairro.'),
+  city: zod.string().min(1, 'Informe sua Cidade.'),
+  uf: zod.string().min(1, 'Informe seu Estado.'),
+  typePayment: zod.string().min(1, 'Informe o tipo de pagamento.'),
+})
+
+type newOrderForm = zod.infer<typeof newOrderFormValidationSchema>
 
 export function Checkout() {
   const [typePayment, SetTypePayment] = useState('')
 
+  const {
+    handleSubmit,
+    register,
+    reset,
+    // formState: { isSubmitting },
+  } = useForm<newOrderForm>({
+    resolver: zodResolver(newOrderFormValidationSchema),
+    defaultValues: {
+      cep: '',
+      street: '',
+      neighborhood: '',
+      city: '',
+      uf: '',
+      typePayment: '',
+    },
+  })
+
+  function handleCreateNewOrder(data: newOrderForm) {
+    console.log(data)
+    reset()
+  }
+
   return (
-    <CheckoutContainer>
+    <CheckoutContainer onSubmit={handleSubmit(handleCreateNewOrder)}>
       <section>
         <h1>Complete seu pedido</h1>
 
@@ -44,14 +78,24 @@ export function Checkout() {
           </Header>
 
           <Address>
-            <CEPInput type="text" name="CEP" id="CEP" placeholder="CEP" />
-            <Input type="text" name="Street" id="Street" placeholder="Rua" />
+            <CEPInput
+              type="text"
+              id="CEP"
+              placeholder="CEP"
+              {...register('cep')}
+            />
+            <Input
+              type="text"
+              id="Street"
+              placeholder="Rua"
+              {...register('street')}
+            />
             <div>
               <Input
                 type="number"
-                name="number"
                 id="number"
                 placeholder="Número"
+                {...register('number')}
               />
               <Input
                 type="text"
@@ -63,12 +107,22 @@ export function Checkout() {
             <div>
               <Input
                 type="text"
-                name="neighborhood"
                 id="neighborhood"
                 placeholder="Bairro"
+                {...register('neighborhood')}
               />
-              <Input type="text" name="city" id="city" placeholder="Cidade" />
-              <UFInput type="text" name="uf" id="uf" placeholder="UF" />
+              <Input
+                type="text"
+                id="city"
+                placeholder="Cidade"
+                {...register('city')}
+              />
+              <UFInput
+                type="text"
+                id="uf"
+                placeholder="UF"
+                {...register('uf')}
+              />
             </div>
           </Address>
         </Content>
@@ -86,7 +140,7 @@ export function Checkout() {
           </Header>
           <PaymentMethods>
             <ButtonPaymentMethods
-              isActive={typePayment === 'creditCard'}
+              isactive={typePayment === 'creditCard'}
               onClick={() => {
                 SetTypePayment('creditCard')
               }}
@@ -96,7 +150,7 @@ export function Checkout() {
               CARTÃO DE CRÉDITO
             </ButtonPaymentMethods>
             <ButtonPaymentMethods
-              isActive={typePayment === 'debitCard'}
+              isactive={typePayment === 'debitCard'}
               onClick={() => {
                 SetTypePayment('debitCard')
               }}
@@ -106,7 +160,7 @@ export function Checkout() {
               CARTÃO DE DÉBITO
             </ButtonPaymentMethods>
             <ButtonPaymentMethods
-              isActive={typePayment === 'cash'}
+              isactive={typePayment === 'cash'}
               onClick={() => {
                 SetTypePayment('cash')
               }}
@@ -122,18 +176,6 @@ export function Checkout() {
       <section>
         <h1>Cafés selecionados</h1>
         <OrderContent>
-          <CardCoffee
-            key={1}
-            image="https://lh3.googleusercontent.com/pw/AJFCJaW6h5K4j3I3FrDVNpUxQYE4b5OOIM-T3Q-fgHvWhKhXNUrfSn7iKIXuNKou52yDXdtfZHO_NG3PcOFGlRyYiiwIpJYZ1wFum9uOMLd0AiP6rxqVymBtrZ4jO6RyM4UiUIWV2yqci42qsaT8k6TlnxbP=w120-h120-s-no?authuser=0"
-            title="Expresso Tradicional"
-            price={9.9}
-          />
-          <CardCoffee
-            key={1}
-            image="https://lh3.googleusercontent.com/pw/AJFCJaW6h5K4j3I3FrDVNpUxQYE4b5OOIM-T3Q-fgHvWhKhXNUrfSn7iKIXuNKou52yDXdtfZHO_NG3PcOFGlRyYiiwIpJYZ1wFum9uOMLd0AiP6rxqVymBtrZ4jO6RyM4UiUIWV2yqci42qsaT8k6TlnxbP=w120-h120-s-no?authuser=0"
-            title="Expresso Tradicional"
-            price={9.9}
-          />
           <CardCoffee
             key={1}
             image="https://lh3.googleusercontent.com/pw/AJFCJaW6h5K4j3I3FrDVNpUxQYE4b5OOIM-T3Q-fgHvWhKhXNUrfSn7iKIXuNKou52yDXdtfZHO_NG3PcOFGlRyYiiwIpJYZ1wFum9uOMLd0AiP6rxqVymBtrZ4jO6RyM4UiUIWV2yqci42qsaT8k6TlnxbP=w120-h120-s-no?authuser=0"
