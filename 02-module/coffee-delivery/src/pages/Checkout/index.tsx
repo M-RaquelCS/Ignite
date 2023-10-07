@@ -29,7 +29,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 const newOrderFormValidationSchema = zod.object({
   cep: zod.string().min(1, 'Informe um CEP.'),
   street: zod.string().min(1, 'Informe o nome de sua rua.'),
-  number: zod.number(),
+  number: zod.number().int().positive(),
   neighborhood: zod.string().min(1, 'Informe o nome do seu bairro.'),
   city: zod.string().min(1, 'Informe sua Cidade.'),
   uf: zod.string().min(1, 'Informe seu Estado.'),
@@ -44,13 +44,13 @@ export function Checkout() {
   const {
     handleSubmit,
     register,
-    reset,
-    // formState: { isSubmitting },
+    formState: { errors },
   } = useForm<newOrderForm>({
     resolver: zodResolver(newOrderFormValidationSchema),
     defaultValues: {
       cep: '',
       street: '',
+      number: 0,
       neighborhood: '',
       city: '',
       uf: '',
@@ -60,7 +60,7 @@ export function Checkout() {
 
   function handleCreateNewOrder(data: newOrderForm) {
     console.log(data)
-    reset()
+    // reset()
   }
 
   return (
@@ -97,6 +97,7 @@ export function Checkout() {
                 placeholder="Número"
                 {...register('number')}
               />
+              <p>{errors.number?.message}</p>
               <Input
                 type="text"
                 name="complement"
