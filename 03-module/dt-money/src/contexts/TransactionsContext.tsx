@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import { createContext } from 'use-context-selector'
 import { api } from "../lib/axios";
 
@@ -34,29 +34,34 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
 
   const [transactions, setTransactions] = useState<TransactionProps[]>([])
 
-  async function fetchTransactions(query?: string){
-    const response = await api.get('transactions', {
-      params: {
-        _sort: 'createdAt',
-        _order:'desc',
-        q: query
-      }
-    })
+  const fetchTransactions = useCallback(
+    async(query?: string) => {
+      const response = await api.get('transactions', {
+        params: {
+          _sort: 'createdAt',
+          _order:'desc',
+          q: query
+        }
+      })
 
-    setTransactions(response.data)
-  }
+      setTransactions(response.data)
+  }, [])
 
-  async function createTransaction({category,description,price,type}: CreateTransactionData){
-    const response = await api.post('transactions', {
-      category,
-      description,
-      price,
-      type,
-      createdAt: new Date(),
-    })
+  // useCallback -> um hook do react que evitará que a função seja recriada na
+  // memória se as dependências dela não tiverem sofrido modificações
 
-    setTransactions(state => [response.data,...state])
-  }
+  const  createTransaction = useCallback(
+    async ({category,description,price,type}: CreateTransactionData) => {
+      const response = await api.post('transactions', {
+        category,
+        description,
+        price,
+        type,
+        createdAt: new Date(), 
+      })
+
+      setTransactions(state => [response.data,...state])
+  }, [])
 
   useEffect(() => {
     fetchTransactions()
