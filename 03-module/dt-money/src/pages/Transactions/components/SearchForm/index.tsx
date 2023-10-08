@@ -1,4 +1,4 @@
-import { memo } from 'react' // -> memorizar
+// import { memo } from 'react' // -> memorizar
 
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -32,7 +32,7 @@ const searchFormSchema = z.object({
 
 type SearchFormInputs = z.infer<typeof searchFormSchema>
 
-function SearchFormComponent(){
+export function SearchForm(){
 
   const fetchTransactions = useContextSelector(TransactionsContext, (context) => {
     return context.fetchTransactions
@@ -58,4 +58,4 @@ function SearchFormComponent(){
   )
 }
 
-export const SearchForm = memo(SearchFormComponent)
+// export const SearchForm = memo(SearchFormComponent)
