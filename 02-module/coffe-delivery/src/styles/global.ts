@@ -29,6 +29,8 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-size: clamp(0.75rem,0.875rem,1rem);
     line-height: 160%;
+
+    cursor: pointer;
   }
 
   h1,h2,h3,h4,h5 {
