@@ -1,5 +1,9 @@
+import { HeroSection } from "./components/HeroSection";
+
 export function Home(){
   return(
-    <h2>home</h2>
+    <>
+      <HeroSection/>
+    </>
   )
 }
