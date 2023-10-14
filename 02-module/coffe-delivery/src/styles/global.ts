@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
 
   :focus {
     outline: 0;
-    box-shadow: 0 0 0 2px ${(props) => props.theme['purple-500']};
+    box-shadow: 0 0 0 2px ${(props) => props.theme['yellow-700']};
   }
 
   body, input, textarea {
@@ -44,5 +44,8 @@ export const GlobalStyle = createGlobalStyle`
     background: ${(props) => props.theme['gray-100']};
     color: ${(props) => props.theme['gray-700']};
     -webkit-font-smoothing: antialiased;
+
+    /* max-width: 1120px;
+    margin: 0 auto; */
   }
 `

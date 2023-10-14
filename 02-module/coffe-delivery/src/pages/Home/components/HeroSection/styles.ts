@@ -3,17 +3,22 @@ import styled from 'styled-components'
 import BackgroundImg from './assets/background.png'
 
 export const HeroSectionContainer = styled.div`
+  background: url(${BackgroundImg}) no-repeat center;
+  background-size: contain;
+
+  height: 34rem;
+`
+
+export const HeroSectionContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: 10rem;
   gap: 3.5rem;
 
-  background: url(${BackgroundImg}) no-repeat center;
-  background-size: cover; // I don't see difference
+  padding-block-start: 5rem;
 
-  width: 100%;
-  height: 34rem;
+  max-width: 1120px;
+  margin-inline: auto;
 `
 
 export const TextSectionContainer = styled.section`
@@ -41,7 +46,7 @@ export const GridTopicsContainer = styled.div`
 
 export const TopicItem = styled.div`
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.75rem;
 
   p {
