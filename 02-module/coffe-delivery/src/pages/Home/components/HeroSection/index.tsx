@@ -16,28 +16,28 @@ export function HeroSection() {
           <GridTopicsContainer>
 
             <TopicItem>
-              <TopicImg topicscolor='yellow_dark'>
+              <TopicImg $topicscolor='yellow_dark'>
                 <ShoppingCart size={16} weight="fill" />
               </TopicImg>
               <p>Compra simples e segura</p>
             </TopicItem>
 
             <TopicItem>
-              <TopicImg topicscolor='gray'>
+              <TopicImg $topicscolor='gray'>
                 <Package size={16} weight="fill" />
               </TopicImg>
               <p>Embalagem mantém o café intacto</p>
             </TopicItem>
 
             <TopicItem>
-              <TopicImg topicscolor='yellow'>
+              <TopicImg $topicscolor='yellow'>
                 <Timer size={16} weight="fill" />
               </TopicImg>
               <p>Entrega rápida e rastreada</p>
             </TopicItem>
 
             <TopicItem>
-              <TopicImg topicscolor='purple'>
+              <TopicImg $topicscolor='purple'>
                 <Coffee size={16} weight="fill" />
               </TopicImg>
               <p>O café chega fresquinho até você</p>

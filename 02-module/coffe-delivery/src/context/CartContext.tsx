@@ -18,6 +18,7 @@ interface ProductToCartData {
 interface CartContextType {
   cart: Coffee[]
   addProductToCart: (data: ProductToCartData) => void,
+  removeProductToCart: (id: number) => void,
 }
 
 export const CartContext = createContext<CartContextType>({} as CartContextType)
@@ -68,13 +69,31 @@ export function CartContextProvider({ children }: CartContextProviderProps){
     
   }
 
-  console.log(cart)
+  function removeProductToCart(id: number){
+    try {
+      const cloneArrayCart = [...cart]
+      const IndexCoffee = cloneArrayCart.findIndex(coffee => coffee.id === id)
+
+      if(IndexCoffee >= 0) { //caso ele não encontre, ele retorna -1
+        cloneArrayCart.splice(IndexCoffee, 1)
+      } else {
+        throw Error()
+      }
+
+      setCart(cloneArrayCart)
+      localStorage.setItem('@coffee-delivery:cart', JSON.stringify(cloneArrayCart))
+
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return(
     <CartContext.Provider 
       value={{
         cart,
-        addProductToCart
+        addProductToCart,
+        removeProductToCart
       }}
     >
       {children}

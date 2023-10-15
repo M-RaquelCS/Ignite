@@ -17,15 +17,20 @@ export function Checkout(){
         <ResumeOrderSection>
 
           <ListCardCoffee>
-            {cart.map((coffee) => {
-              return(
-                <ResumeCardCoffee 
-                  key={coffee.id}
-                  id={coffee.id}
-                  amount={coffee.amount}
-                />
-              )
-            })}
+            { cart.length > 0 ? (
+              cart.map((coffee) => {
+                return(
+                  <ResumeCardCoffee 
+                    key={coffee.id}
+                    id={coffee.id}
+                    amount={coffee.amount}
+                  />
+                )
+              })
+            ) : (
+              <h4 style={{ textAlign: 'center' }}>Carrinho está vazio!</h4>
+            )}
+            
           </ListCardCoffee>
 
           <ResumeTotalOrder>
@@ -43,7 +48,12 @@ export function Checkout(){
             </TotalLine>
           </ResumeTotalOrder>
 
-          <ButtonConfirmOrder>
+          <ButtonConfirmOrder
+            disabled={cart.length <= 0}
+            onClick={() => {
+              console.log('oi')
+            }}
+          >
             Confirmar Pedido
           </ButtonConfirmOrder>
 
