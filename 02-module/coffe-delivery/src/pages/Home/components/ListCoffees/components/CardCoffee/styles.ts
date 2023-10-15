@@ -73,7 +73,7 @@ export const Price = styled.div`
   }
 `
 
-export const QuantitySubmitRow = styled.div`
+export const QuantitySubmitRow = styled.form`
   display: flex;
   align-items: center;
   gap: 0.5rem;

@@ -1,3 +1,6 @@
+import { useContext, useState } from 'react';
+import { CartContext } from '../../../../../../hooks/useCart';
+
 import { ShoppingCart } from '@phosphor-icons/react'
 
 import { CardCoffeeContainer, Price, PriceAndQuantityRow, Quantity, QuantitySubmitRow, Tags, TagsRow, TextContent } from "./styles";
@@ -14,6 +17,23 @@ type CardCoffeeProps = {
 }
 
 export function CardCoffee({ coffeeObject }: CardCoffeeProps){
+
+  const [ coffeeQuantity, setCoffeeQuantity ] = useState(0)
+  const { addProductToCart } = useContext(CartContext)
+  
+  function handleAddCoffeeToCart(e: React.FormEvent){
+    e.preventDefault()
+
+    const data = {
+      idCoffee: coffeeObject.id,
+      nameCoffee: coffeeObject.name,
+      priceCoffee: coffeeObject.price,
+      amountCoffee: coffeeQuantity
+    }
+
+    addProductToCart(data)
+  }
+
   return (
     <CardCoffeeContainer key={coffeeObject.id}>
 
@@ -38,9 +58,14 @@ export function CardCoffee({ coffeeObject }: CardCoffeeProps){
           <h5>{coffeeObject.price}</h5>
         </Price>
 
-        <QuantitySubmitRow>
-          <Quantity type="number" />
-          <button>
+        <QuantitySubmitRow as='form' onSubmit={handleAddCoffeeToCart}>
+          <Quantity 
+            type="number" 
+            min={1} 
+            max={10}
+            onChange={e => setCoffeeQuantity(Number(e.target.value))}
+          />
+          <button type='submit'>
             <ShoppingCart size={18} weight="fill" />
           </button>
         </QuantitySubmitRow>
