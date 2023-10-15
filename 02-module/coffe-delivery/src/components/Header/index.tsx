@@ -18,7 +18,7 @@ export function Header(){
           <p>Belo Jardim, PE</p>
         </span>
 
-        <a href="/cart">
+        <a href="/checkout">
           <ShoppingCart size={22} weight="fill" />
         </a>
 
