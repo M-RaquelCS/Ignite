@@ -1,11 +1,12 @@
-import { ReactNode, createContext, useEffect, useReducer } from "react";
-import { Coffee, cartReducer } from "../reducers/cart/reducer";
-import { addProductToCartAction } from "../reducers/cart/actions";
+import { ReactNode, createContext, useState } from "react";
+
+interface Coffee {
+  id: number
+  amount: number
+}
 
 interface ProductToCartData {
   idCoffee: number;
-  nameCoffee: string
-  priceCoffee: string
   amountCoffee: number;
 }
 
@@ -22,40 +23,44 @@ interface CartContextProviderProps {
 
 export function CartContextProvider({ children }: CartContextProviderProps){
 
-  const [state, dispatch] = useReducer(
-    cartReducer,
-    {
-      cart: [],
-    },
-    (initialState) => {
-      const storedStateAsJSON = localStorage.getItem(
-        '@coffee-delivery:cart'
-      )
-      if (storedStateAsJSON){
-        return JSON.parse(storedStateAsJSON) 
-      }
-      return initialState
+  const [ cart, setCart ] = useState<Coffee[]>(() => {
+    const storedCart = localStorage.getItem('@coffee-delivery:cart')
+    // console.log(storedCart)
+
+    if (storedCart) {
+      // console.log(JSON.stringify(storedCart))
+      return JSON.parse(storedCart)
     }
-  )
 
-  const { cart } = state
-  console.log(cart)
-
-  useEffect(() => {
-    const stateJSON = JSON.stringify(state)
-    localStorage.setItem('@coffee-delivery:cart', JSON.stringify(stateJSON))
-  }, [state])
+    return []
+  })
 
   function addProductToCart(data: ProductToCartData){
-    const itemCoffee = {
-      id: data.idCoffee,
-      name: data.nameCoffee,
-      price: data.priceCoffee,
-      amount: data.amountCoffee
-    }
+    try {
+      // console.log(cart)
+      const cloneArrayCart = [...cart]
+      // console.log(cloneArrayCart)
+      const productExists = cloneArrayCart.find(coffee => coffee.id === data.idCoffee)
 
-    console.log(itemCoffee)
-    dispatch(addProductToCartAction(itemCoffee))
+      if (productExists) {
+        productExists.amount = data.amountCoffee
+      }else {
+        const itemCoffee = {
+          id: data.idCoffee,
+          amount: data.amountCoffee
+        }
+        // console.log(itemCoffee)
+        cloneArrayCart.push(itemCoffee)
+      }
+
+      setCart(cloneArrayCart)
+      // console.log(cloneArrayCart)
+      localStorage.setItem('@coffee-delivery:cart', JSON.stringify(cloneArrayCart))
+      // localStorage.clear()
+    } catch (e) {
+      console.log(e)
+    }
+    
   }
 
   return(

@@ -26,8 +26,6 @@ export function CardCoffee({ coffeeObject }: CardCoffeeProps){
 
     const data = {
       idCoffee: coffeeObject.id,
-      nameCoffee: coffeeObject.name,
-      priceCoffee: coffeeObject.price,
       amountCoffee: coffeeQuantity
     }
 
