@@ -1,8 +1,9 @@
 import { HeaderContainer, NavigationHeader } from './styles'
 
-import { ShoppingCart, MapPin } from '@phosphor-icons/react'
+import { MapPin } from '@phosphor-icons/react'
 
 import FullLogo from '../../assets/full-logo.svg'
+import { CartLink } from './components/CartLink'
 
 export function Header(){
   return (
@@ -18,9 +19,7 @@ export function Header(){
           <p>Belo Jardim, PE</p>
         </span>
 
-        <a href="/checkout">
-          <ShoppingCart size={22} weight="fill" />
-        </a>
+        <CartLink />
 
       </NavigationHeader>
       
