@@ -1,7 +1,13 @@
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
+
 import { ResumeCardCoffee } from "./components/ResumeCardCoffee";
 import { ButtonConfirmOrder, ListCardCoffee, ResumeOrderSection, ResumeTotalOrder, ResumeTotalOrderLine, TotalLine } from "./styles";
 
 export function Checkout(){
+
+  const { cart } = useContext(CartContext)
+
   return(
     <div>
       <section></section>
@@ -11,8 +17,15 @@ export function Checkout(){
         <ResumeOrderSection>
 
           <ListCardCoffee>
-            <ResumeCardCoffee/>
-            <ResumeCardCoffee/>
+            {cart.map((coffee) => {
+              return(
+                <ResumeCardCoffee 
+                  key={coffee.id}
+                  id={coffee.id}
+                  amount={coffee.amount}
+                />
+              )
+            })}
           </ListCardCoffee>
 
           <ResumeTotalOrder>

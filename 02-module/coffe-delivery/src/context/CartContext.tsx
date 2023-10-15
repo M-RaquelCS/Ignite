@@ -5,6 +5,11 @@ interface Coffee {
   amount: number
 }
 
+// interface Order {
+//   id: Date,
+//   coffees: Coffee[]
+// }
+
 interface ProductToCartData {
   idCoffee: number;
   amountCoffee: number;
@@ -37,7 +42,7 @@ export function CartContextProvider({ children }: CartContextProviderProps){
 
   function addProductToCart(data: ProductToCartData){
     try {
-      // console.log(cart)
+      
       const cloneArrayCart = [...cart]
       // console.log(cloneArrayCart)
       const productExists = cloneArrayCart.find(coffee => coffee.id === data.idCoffee)
@@ -62,6 +67,8 @@ export function CartContextProvider({ children }: CartContextProviderProps){
     }
     
   }
+
+  console.log(cart)
 
   return(
     <CartContext.Provider 

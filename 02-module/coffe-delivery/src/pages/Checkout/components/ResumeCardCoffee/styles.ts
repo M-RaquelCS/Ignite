@@ -29,6 +29,10 @@ export const TitleCoffeeRow = styled.div`
 
 export const ActionsCoffeeRow = styled.div`
   margin-top: 0.5rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `
 
 export const RemoveButton = styled.button`

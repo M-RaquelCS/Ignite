@@ -4,7 +4,7 @@ import { GlobalStyle } from './styles/global'
 
 import { BrowserRouter } from 'react-router-dom'
 import { Router } from './Router'
-import { CartContextProvider } from './hooks/useCart'
+import { CartContextProvider } from './context/CartContext'
 
 export function App() {
   return (

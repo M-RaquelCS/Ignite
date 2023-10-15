@@ -1,23 +1,34 @@
 import { Trash } from "@phosphor-icons/react";
 import { ActionsCoffeeRow, DetailsRow, RemoveButton, ResumeCardCoffeeContainer, TitleCoffeeRow } from "./styles";
+import { coffees } from "../../../../utils/coffees";
 
-export function ResumeCardCoffee(){
+interface IResumeCardCoffee {
+  id: number
+  amount: number
+}
+
+export function ResumeCardCoffee({ id,amount }: IResumeCardCoffee){
+
+  const data = coffees.find(coffee => coffee.id === id)
+  // console.log(data)
+
   return(
     <ResumeCardCoffeeContainer>
 
       <img 
-        src="https://lh3.googleusercontent.com/pw/AJFCJaVMO-LSPUk0P92XEKo0x-zNq2XyjBaE5uJaOhr9PX3kiB4nJGCqg7cSZ9yVg9jnL5NtWL8EiIkueV9hhLZwG0mAjVrqKMeg0WbTZ9b93BUZx3tcqJrvcq5S9RUa_U_NBZvARgbSR1M4o5tms6TM81h-=w120-h120-s-no?authuser=0" 
-        alt="coffee img" 
+        src={data?.img}
+        alt={data?.name} 
       />
 
       <DetailsRow>
 
         <TitleCoffeeRow>
-          <p>Café tradicional</p>
-          <strong>R$ 9,90</strong>
+          <p>{data?.name}</p>
+          <strong>R$ {data?.price}</strong>
         </TitleCoffeeRow>
 
         <ActionsCoffeeRow>
+          {amount}
           <RemoveButton>
             <Trash size={16}/>
             Remover

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { CartContext } from '../../../../../../hooks/useCart';
+import { CartContext } from '../../../../../../context/CartContext';
 
 import { ShoppingCart } from '@phosphor-icons/react'
 
