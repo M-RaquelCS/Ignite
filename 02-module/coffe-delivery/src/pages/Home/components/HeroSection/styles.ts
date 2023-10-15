@@ -61,7 +61,7 @@ const TOPICS_COLORS = {
   purple: 'purple-500',
 } as const
 interface StatusProps {
-  topicscolor: keyof typeof TOPICS_COLORS
+  $topicscolor: keyof typeof TOPICS_COLORS
 }
 
 export const TopicImg = styled.div<StatusProps>`
@@ -72,7 +72,7 @@ export const TopicImg = styled.div<StatusProps>`
   padding: 0.5rem;
   border-radius: 50%;
 
-  background-color: ${props => props.theme[TOPICS_COLORS[props.topicscolor]]};
+  background-color: ${props => props.theme[TOPICS_COLORS[props.$topicscolor]]};
 
   svg {
     color: ${props => props.theme.white};
