@@ -15,7 +15,6 @@ export function ResumeCardCoffee({ id,amount }: IResumeCardCoffee){
 
   const { removeProductToCart } = useContext(CartContext)
   const data = coffees.find(coffee => coffee.id === id)
-  console.log(id)
 
   return(
     <ResumeCardCoffeeContainer>
