@@ -82,7 +82,6 @@ export function CartContextProvider({ children }: CartContextProviderProps){
       setCart(cloneArrayCart)
       // console.log(cloneArrayCart)
       localStorage.setItem('@coffee-delivery:cart', JSON.stringify(cloneArrayCart))
-      // localStorage.clear()
     } catch (e) {
       console.log(e)
     }
@@ -115,7 +114,7 @@ export function CartContextProvider({ children }: CartContextProviderProps){
       cloneArrayOrders.push(data)
       setOrders(cloneArrayOrders)
       localStorage.setItem('@coffee-delivery:orders', JSON.stringify(cloneArrayOrders))
-
+      localStorage.removeItem('@coffee-delivery:cart')
     }catch(e){
       console.log(e)
     }
