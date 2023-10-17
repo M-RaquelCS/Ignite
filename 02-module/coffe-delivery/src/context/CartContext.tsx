@@ -1,4 +1,6 @@
 import { ReactNode, createContext, useState } from "react";
+import { coffees } from "../utils/coffees";
+import { formatCurrency } from "../utils/formatCurrency";
 
 interface Coffee {
   id: number
@@ -29,7 +31,10 @@ interface CartContextType {
   cart: Coffee[]
   addProductToCart: (data: ProductToCartData) => void,
   removeProductToCart: (id: number) => void,
-  createNewOrder: (data: Order) => void
+  createNewOrder: (data: Order) => void,
+  cartItemsTotal: number,
+  OrderTotal: number,
+  valueToDelivery: number
 }
 
 export const CartContext = createContext<CartContextType>({} as CartContextType)
@@ -39,6 +44,8 @@ interface CartContextProviderProps {
 }
 
 export function CartContextProvider({ children }: CartContextProviderProps){
+
+  const valueToDelivery = 5.00
 
   const [ cart, setCart ] = useState<Coffee[]>(() => {
     const storedCart = localStorage.getItem('@coffee-delivery:cart')
@@ -120,13 +127,40 @@ export function CartContextProvider({ children }: CartContextProviderProps){
     }
   }
 
+  const cartItemsFormatted = cart.map( product => {
+    const data = coffees.find(coffee => coffee.id === product.id)
+    if (data) {
+      const dataFormatted = {
+        id: product.id,
+        amount: product.amount,
+        price: formatCurrency(data.price) as number
+        
+      }
+      return dataFormatted
+    }
+  })
+
+  const cartItemsTotal = cartItemsFormatted.reduce((accumulator, item) => {
+    if (item) {
+      return  accumulator + (item.price * item.amount)
+    }
+    return accumulator
+  }, 0)
+
+  const OrderTotal = cartItemsTotal + valueToDelivery
+
+  console.log(OrderTotal)
+
   return(
     <CartContext.Provider 
       value={{
         cart,
         addProductToCart,
         removeProductToCart,
-        createNewOrder
+        createNewOrder,
+        cartItemsTotal,
+        OrderTotal,
+        valueToDelivery
       }}
     >
       {children}

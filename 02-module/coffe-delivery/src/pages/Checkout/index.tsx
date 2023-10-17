@@ -15,12 +15,10 @@ import {
   FormOrderContainer,  
   ListCardCoffee, 
   ResumeOrderSection, 
-  ResumeTotalOrder, 
-  ResumeTotalOrderLine, 
   SectionAddressFormOrderContainer, 
-  SectionFormOrderContainer,  
-  TotalLine
+  SectionFormOrderContainer
 } from "./styles";
+import { ResumeTotalOrder } from "./components/ResumeTotalOrder";
 
 const newOrderFormValidationSchema = zod.object({
   cep: zod.string().min(1, 'Informe um CEP.'),
@@ -40,7 +38,7 @@ type newOrderForm = zod.infer<typeof partialNewOrderFormValidationSchema>
 
 export function Checkout(){
 
-  const { cart, createNewOrder } = useContext(CartContext)
+  const { cart, createNewOrder, OrderTotal } = useContext(CartContext)
   const [typePayment, SetTypePayment] = useState('')
 
   const newOrderForm = useForm<newOrderForm>({
@@ -61,7 +59,7 @@ export function Checkout(){
       address: data,
       typePayment: typePayment,
       coffees: cart,
-      total: 0.00
+      total: OrderTotal.toFixed(2)
     }
 
     if (typePayment !== '') {
@@ -107,20 +105,7 @@ export function Checkout(){
               
             </ListCardCoffee>
 
-            <ResumeTotalOrder>
-              <ResumeTotalOrderLine>
-                <span>Total de itens</span>
-                <p>R$ 29,70</p>
-              </ResumeTotalOrderLine>
-              <ResumeTotalOrderLine>
-                <span>Entrega</span>
-                <p>R$ 3,50</p>
-              </ResumeTotalOrderLine>
-              <TotalLine>
-                <span>Total</span>
-                <p>R$ 33,20</p>
-              </TotalLine>
-            </ResumeTotalOrder>
+            <ResumeTotalOrder />
 
             <ButtonConfirmOrder
               disabled={cart.length <= 0}
