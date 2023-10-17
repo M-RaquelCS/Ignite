@@ -40,7 +40,7 @@ type newOrderForm = zod.infer<typeof partialNewOrderFormValidationSchema>
 
 export function Checkout(){
 
-  const { cart } = useContext(CartContext)
+  const { cart, createNewOrder } = useContext(CartContext)
   const [typePayment, SetTypePayment] = useState('')
 
   const newOrderForm = useForm<newOrderForm>({
@@ -55,8 +55,20 @@ export function Checkout(){
   }
 
   function handleCreateNewOrderForm(data: newOrderForm) {
-    console.log(cart)
-    console.log(data, typePayment)
+
+    const order = {
+      id: new Date(),
+      address: data,
+      typePayment: typePayment,
+      coffees: cart,
+      total: 0.00
+    }
+
+    if (typePayment !== '') {
+      createNewOrder(order)
+    } else {
+      alert('selecione o metódo de pagamento')
+    }
   }
 
   return(
