@@ -19,6 +19,7 @@ import {
   SectionFormOrderContainer
 } from "./styles";
 import { ResumeTotalOrder } from "./components/ResumeTotalOrder";
+import { useNavigate } from "react-router-dom";
 
 const newOrderFormValidationSchema = zod.object({
   cep: zod.string().min(1, 'Informe um CEP.'),
@@ -38,6 +39,8 @@ type newOrderForm = zod.infer<typeof partialNewOrderFormValidationSchema>
 
 export function Checkout(){
 
+  const navigate = useNavigate()
+
   const { cart, createNewOrder, OrderTotal } = useContext(CartContext)
   const [typePayment, SetTypePayment] = useState('')
 
@@ -55,7 +58,7 @@ export function Checkout(){
   function handleCreateNewOrderForm(data: newOrderForm) {
 
     const order = {
-      id: new Date(),
+      id: new Date().toISOString(),
       address: data,
       typePayment: typePayment,
       coffees: cart,
@@ -64,6 +67,9 @@ export function Checkout(){
 
     if (typePayment !== '') {
       createNewOrder(order)
+      navigate('/success', {
+        state: order.id
+      })
     } else {
       alert('selecione o metódo de pagamento')
     }

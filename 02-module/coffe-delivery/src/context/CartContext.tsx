@@ -8,7 +8,7 @@ interface Coffee {
 }
 
 interface Order {
-  id: Date,
+  id: string,
   address: {
     cep: string,
     street: string,
@@ -28,7 +28,8 @@ interface ProductToCartData {
 }
 
 interface CartContextType {
-  cart: Coffee[]
+  cart: Coffee[],
+  orders: Order[]
   addProductToCart: (data: ProductToCartData) => void,
   removeProductToCart: (id: number) => void,
   createNewOrder: (data: Order) => void,
@@ -149,12 +150,11 @@ export function CartContextProvider({ children }: CartContextProviderProps){
 
   const OrderTotal = cartItemsTotal + valueToDelivery
 
-  console.log(OrderTotal)
-
   return(
     <CartContext.Provider 
       value={{
         cart,
+        orders,
         addProductToCart,
         removeProductToCart,
         createNewOrder,
