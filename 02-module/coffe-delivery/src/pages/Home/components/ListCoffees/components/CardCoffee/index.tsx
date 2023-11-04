@@ -3,7 +3,8 @@ import { CartContext } from '../../../../../../context/CartContext';
 
 import { ShoppingCart } from '@phosphor-icons/react'
 
-import { CardCoffeeContainer, Price, PriceAndQuantityRow, Quantity, QuantitySubmitRow, Tags, TagsRow, TextContent } from "./styles";
+import { CardCoffeeContainer, Price, PriceAndQuantityRow, QuantitySubmitRow, Tags, TagsRow, TextContent } from "./styles";
+import { InputAmount } from '../../../../../../components/InputAmount';
 
 type CardCoffeeProps = {
   coffeeObject: {
@@ -32,6 +33,16 @@ export function CardCoffee({ coffeeObject }: CardCoffeeProps){
     addProductToCart(data)
   }
 
+  function handlePlusAmount(){
+    if (coffeeQuantity < 10){
+      setCoffeeQuantity((state) => state + 1)
+    }
+  }
+  function handleMinusAmount(){
+    if (coffeeQuantity >= 1)
+    setCoffeeQuantity((state) => state - 1)
+  }
+
   return (
     <CardCoffeeContainer key={coffeeObject.id}>
 
@@ -57,12 +68,7 @@ export function CardCoffee({ coffeeObject }: CardCoffeeProps){
         </Price>
 
         <QuantitySubmitRow as='form' onSubmit={handleAddCoffeeToCart}>
-          <Quantity 
-            type="number" 
-            min={1} 
-            max={10}
-            onChange={e => setCoffeeQuantity(Number(e.target.value))}
-          />
+          <InputAmount amount={coffeeQuantity} minusAmount={handleMinusAmount} plusAmount={handlePlusAmount} />
           <button type='submit'>
             <ShoppingCart size={18} weight="fill" />
           </button>

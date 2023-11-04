@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../../context/CartContext";
 
 import { coffees } from "../../../../utils/coffees";
 
 import { Trash } from "@phosphor-icons/react";
 import { ActionsCoffeeRow, DetailsRow, RemoveButton, ResumeCardCoffeeContainer, TitleCoffeeRow } from "./styles";
+import { InputAmount } from "../../../../components/InputAmount";
 
 interface IResumeCardCoffee {
   id: number
@@ -13,8 +14,32 @@ interface IResumeCardCoffee {
 
 export function ResumeCardCoffee({ id,amount }: IResumeCardCoffee){
 
-  const { removeProductToCart } = useContext(CartContext)
+  const { removeProductToCart, addProductToCart } = useContext(CartContext)
   const data = coffees.find(coffee => coffee.id === id)
+
+  const [ coffeeQuantity, setCoffeeQuantity ] = useState(() => (amount ? amount : 0))
+
+  function handlePlusAmount(){
+    if (coffeeQuantity < 10){
+      setCoffeeQuantity((state) => state + 1)
+    }
+  }
+  function handleMinusAmount(){
+    if (coffeeQuantity >= 1) {
+      setCoffeeQuantity((state) => state - 1)
+    }
+  }
+
+  useEffect(() => {
+    if (data){
+      const coffee = {
+        idCoffee: data.id,
+        amountCoffee: coffeeQuantity
+      }
+      addProductToCart(coffee)
+    }
+    
+  }, [coffeeQuantity])
 
   return(
     <ResumeCardCoffeeContainer>
@@ -31,7 +56,7 @@ export function ResumeCardCoffee({ id,amount }: IResumeCardCoffee){
         </TitleCoffeeRow>
 
         <ActionsCoffeeRow>
-          {amount}
+          <InputAmount amount={coffeeQuantity} minusAmount={handleMinusAmount} plusAmount={handlePlusAmount} />
           <RemoveButton
             onClick={() => {
               if (data) {
