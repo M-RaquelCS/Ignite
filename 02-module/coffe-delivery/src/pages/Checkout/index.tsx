@@ -50,8 +50,7 @@ export function Checkout(){
     resolver: zodResolver(newOrderFormValidationSchema)
   })
 
-  const { handleSubmit, formState: { errors } } = newOrderForm
-  console.log(errors)
+  const { handleSubmit } = newOrderForm
 
   function handleGetTypePayment(type: string) {
     SetTypePayment(type)
@@ -119,9 +118,6 @@ export function Checkout(){
             <ButtonConfirmOrder
               disabled={cart.length <= 0}
               type="submit"
-              onClick={() => {
-                console.log('oi')
-              }}
             >
               Confirmar Pedido
             </ButtonConfirmOrder>
