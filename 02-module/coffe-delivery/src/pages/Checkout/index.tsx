@@ -4,6 +4,8 @@ import { FormProvider, useForm } from 'react-hook-form'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { toast } from 'react-toastify'
+
 import { CartContext } from "../../context/CartContext";
 
 import { AddressFormOrder } from "./components/AddressFormOrder";
@@ -67,11 +69,12 @@ export function Checkout(){
 
     if (typePayment !== '') {
       createNewOrder(order)
+      toast.success('Pedido efetuado com sucesso!')
       navigate('/success', {
         state: order.id
       })
     } else {
-      alert('selecione o metódo de pagamento')
+      toast.warn('Selecione um metódo de pagamento')
     }
   }
 

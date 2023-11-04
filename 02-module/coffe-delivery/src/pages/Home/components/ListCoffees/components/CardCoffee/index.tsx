@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react';
-import { CartContext } from '../../../../../../context/CartContext';
-
 import { ShoppingCart } from '@phosphor-icons/react'
+import { toast } from 'react-toastify'
+
+import { CartContext } from '../../../../../../context/CartContext';
 
 import { CardCoffeeContainer, Price, PriceAndQuantityRow, QuantitySubmitRow, Tags, TagsRow, TextContent } from "./styles";
 import { InputAmount } from '../../../../../../components/InputAmount';
@@ -31,6 +32,7 @@ export function CardCoffee({ coffeeObject }: CardCoffeeProps){
     }
 
     addProductToCart(data)
+    toast.success('Produto adicionado ao carrinho!')
   }
 
   function handlePlusAmount(){
@@ -41,6 +43,10 @@ export function CardCoffee({ coffeeObject }: CardCoffeeProps){
   function handleMinusAmount(){
     if (coffeeQuantity >= 1)
     setCoffeeQuantity((state) => state - 1)
+  }
+
+  if (coffeeQuantity == 10){
+    toast.warn('Quantidade máxima atingida!')
   }
 
   return (

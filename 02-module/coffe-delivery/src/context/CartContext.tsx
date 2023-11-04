@@ -1,4 +1,6 @@
 import { ReactNode, createContext, useState } from "react";
+import { toast } from 'react-toastify'
+
 import { coffees } from "../utils/coffees";
 import { formatCurrency } from "../utils/formatCurrency";
 
@@ -91,6 +93,7 @@ export function CartContextProvider({ children }: CartContextProviderProps){
       // console.log(cloneArrayCart)
       localStorage.setItem('@coffee-delivery:cart', JSON.stringify(cloneArrayCart))
     } catch (e) {
+      toast.error('Algo deu errado, tente novamente mais tarde.')
       console.log(e)
     }
     
@@ -111,6 +114,7 @@ export function CartContextProvider({ children }: CartContextProviderProps){
       localStorage.setItem('@coffee-delivery:cart', JSON.stringify(cloneArrayCart))
 
     } catch (e) {
+      toast.error('Algo deu errado, tente novamente mais tarde.')
       console.log(e)
     }
   }
@@ -124,6 +128,7 @@ export function CartContextProvider({ children }: CartContextProviderProps){
       localStorage.setItem('@coffee-delivery:orders', JSON.stringify(cloneArrayOrders))
       localStorage.removeItem('@coffee-delivery:cart')
     }catch(e){
+      toast.error('Algo deu errado, tente novamente mais tarde.')
       console.log(e)
     }
   }
