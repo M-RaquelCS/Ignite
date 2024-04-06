@@ -15,7 +15,7 @@ export function ListCard() {
   return (
     <GridContainer>
       {issues.map((issue: any) => (
-        <Card key={issue.id} />
+        <Card key={issue.id} title={issue.title} description={issue.body} />
       ))}
     </GridContainer>
   )
