@@ -5,7 +5,6 @@ export const Container = styled.div`
   background-color: ${(props) => props.theme['gray-700']};
 
   margin-top: calc(0px - 2rem - 88px);
-  /* z-index: 1; */
 
   padding: 2rem 2.5rem;
   max-width: 864px;

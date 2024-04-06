@@ -17,43 +17,47 @@ import {
   Infos,
   Info,
 } from './styles'
+import { useEffect, useState } from 'react'
 
 export function Profile() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [userData, setUserData] = useState({} as any)
+
+  useEffect(() => {
+    fetch('https://api.github.com/users/M-RaquelCS')
+      .then((response) => response.json())
+      .then((data) => setUserData(data))
+  }, [])
+  // é de longe uma opção viável chamar aqui e assim mas é o que temos
+
   return (
     <Container>
-      <Image
-        src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=148&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt=""
-      />
+      <Image src={userData.avatar_url} alt="" />
       <DataUser>
         <NameAndBio>
           <NameAndLink>
-            <Name>Raquel Santos</Name>
-            <Link href="/">
+            <Name>{userData.name}</Name>
+            <Link href={userData.html_url} target="_blank">
               Github
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
             </Link>
           </NameAndLink>
 
-          <p>
-            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
-            volutpat pulvinar vel mass.
-          </p>
+          <p>{userData.bio}</p>
         </NameAndBio>
 
         <Infos>
           <Info>
             <FontAwesomeIcon icon={faGithub} />
-            M-RaquelCS
+            {userData.login}
           </Info>
           <Info>
             <FontAwesomeIcon icon={faBuilding} />
-            Grupo Moura
+            {userData.company}
           </Info>
           <Info>
             <FontAwesomeIcon icon={faUserGroup} />
-            32 seguidores
+            {userData.followers} seguidores
           </Info>
         </Infos>
       </DataUser>
