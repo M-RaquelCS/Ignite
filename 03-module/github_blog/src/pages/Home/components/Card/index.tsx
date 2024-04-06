@@ -1,6 +1,6 @@
-import { formatDistance } from 'date-fns'
 import { Container, Header } from './style'
-import { ptBR } from 'date-fns/locale/pt-BR'
+import Markdown from 'react-markdown'
+import { dateFormatted } from '../../../../utils/dateformatter'
 
 interface CardProps {
   title: string
@@ -9,18 +9,15 @@ interface CardProps {
 }
 
 export function Card({ title, description, createdAt }: CardProps) {
-  const dateDistance = formatDistance(createdAt, new Date(), {
-    locale: ptBR,
-    addSuffix: true,
-  })
-
   return (
     <Container>
       <Header>
         <h3>{title}</h3>
-        <span>{dateDistance}</span>
+        <span>{dateFormatted(createdAt)}</span>
       </Header>
-      <p>{description}</p>
+      <div>
+        <Markdown>{description}</Markdown>
+      </div>
     </Container>
   )
 }

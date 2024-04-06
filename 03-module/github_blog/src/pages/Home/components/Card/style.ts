@@ -13,7 +13,8 @@ export const Container = styled.a`
     background-color: ${(props) => props.theme['blue-600']};
   }
 
-  p {
+  div {
+    max-width: 300px;
     max-height: 100px;
 
     overflow: hidden;
