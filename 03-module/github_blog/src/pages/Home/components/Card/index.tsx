@@ -4,8 +4,8 @@ import { ptBR } from 'date-fns/locale/pt-BR'
 
 interface CardProps {
   title: string
-  description: string
-  createdAt: Date
+  description: string | null | undefined
+  createdAt: string
 }
 
 export function Card({ title, description, createdAt }: CardProps) {

@@ -1,20 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from 'react'
-import { Card } from '../Card'
 import { GridContainer } from './style'
+import { useQuery } from '@tanstack/react-query'
+import { getIssues } from '../../../../services/getIssues'
+import { Card } from '../Card'
 
 export function ListCard() {
-  const [issues, setIssues] = useState([] as any)
-  useEffect(() => {
-    fetch('https://api.github.com/repos/m-raquelcs/ignite/issues')
-      .then((response) => response.json())
-      .then((data) => setIssues(data))
-  }, [])
-  // é de longe uma opção viável chamar aqui e assim mas é o que temos
+  const issues = useQuery({
+    queryKey: ['issues'],
+    queryFn: () => getIssues(),
+  })
+
+  if (issues.isPending) return 'Loading issues...'
 
   return (
     <GridContainer>
-      {issues.map((issue: any) => (
+      {issues.data?.data.map((issue) => (
         <Card
           key={issue.id}
           title={issue.title}
