@@ -14,11 +14,9 @@ export const Container = styled.a`
   }
 
   p {
-    max-width: 300px;
     max-height: 100px;
 
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
   }
 `
