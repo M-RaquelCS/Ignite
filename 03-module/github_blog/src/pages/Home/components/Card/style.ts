@@ -3,9 +3,12 @@ import styled from 'styled-components'
 export const Container = styled.a`
   padding: 2rem;
   background-color: ${(props) => props.theme['blue-700']};
+  color: ${(props) => props.theme['blue-300']};
   border-radius: 0.625rem;
 
   margin-top: 3rem;
+
+  text-decoration: none;
 
   cursor: pointer;
   transition: all 0.2s ease-in-out;

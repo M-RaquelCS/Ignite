@@ -6,17 +6,24 @@ interface CardProps {
   title: string
   description: string | null | undefined
   createdAt: string
+  id: number
 }
 
-export function Card({ title, description, createdAt }: CardProps) {
+export function Card({ title, description, createdAt, id }: CardProps) {
   return (
-    <Container>
+    <Container href={`/post/${id}`}>
       <Header>
         <h3>{title}</h3>
         <span>{dateFormatted(createdAt)}</span>
       </Header>
       <div>
-        <Markdown>{description}</Markdown>
+        <Markdown
+          components={{
+            a: ({ ...rest }) => <a style={{ color: '#3294F8' }} {...rest} />,
+          }}
+        >
+          {description}
+        </Markdown>
       </div>
     </Container>
   )

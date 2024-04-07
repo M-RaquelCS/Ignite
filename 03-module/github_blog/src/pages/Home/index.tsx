@@ -1,4 +1,4 @@
-import { ListCard } from './components/ListCard'
+import { ListCard, totalIssues } from './components/ListCard'
 import { Container, Header } from './styles'
 
 export default function Home() {
@@ -6,7 +6,7 @@ export default function Home() {
     <Container>
       <Header>
         <h3>Publicações</h3>
-        <span>6 publicações</span>
+        <span>{totalIssues} publicações</span>
       </Header>
       <ListCard />
     </Container>

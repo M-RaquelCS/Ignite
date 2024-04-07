@@ -20,8 +20,7 @@ export function Post() {
     <Container>
       <Markdown
         components={{
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          img: ({ node, ...rest }) => (
+          img: ({ ...rest }) => (
             <img
               style={{ maxWidth: '864px' }}
               alt=""
@@ -31,6 +30,7 @@ export function Post() {
               >)}
             />
           ),
+          a: ({ ...rest }) => <a style={{ color: '#3294F8' }} {...rest} />,
         }}
       >
         {bodyIssue.body}
