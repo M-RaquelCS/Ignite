@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  margin-top: 4.5rem;
-  margin-inline: auto;
+  margin: 4.5rem auto 2rem auto;
 
   display: grid;
   justify-items: center;

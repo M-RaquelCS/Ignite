@@ -16,6 +16,9 @@ export function Post() {
   const bodyIssue = {
     body: issue.data?.data.body,
   }
+
+  if (issue.isPending) return 'Loading...'
+
   return (
     <Container>
       <Markdown

@@ -30,6 +30,8 @@ export function IssueDetails() {
     createdAt: issue.data?.data.created_at,
   }
 
+  if (issue.isPending) return 'Loading...'
+
   return (
     <Container>
       <DataUser>
