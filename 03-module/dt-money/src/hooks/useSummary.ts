@@ -7,9 +7,9 @@ export function useSummary() {
     return context.transactions
   })
 
-  // reduce -> reduzir o array em uma nova estrtura -> {income: 0 , outcome: 0, total: 0}
+  // reduce -> reduzir o array em uma nova estrutura -> {income: 0 , outcome: 0, total: 0}
   const summary = useMemo(()=> {
-    transactions.reduce((acumulator, transaction) => {
+    return transactions.reduce((acumulator, transaction) => {
       if (transaction.type === 'income'){
         acumulator.income += transaction.price
         acumulator.total += transaction.price

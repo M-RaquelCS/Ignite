@@ -1,4 +1,9 @@
-import { CalendarDays, ExternalLink, Github, MessageCircle } from 'lucide-react'
+import {
+  CalendarDays,
+  ExternalLink,
+  LucideGitBranchPlus,
+  MessageCircle,
+} from 'lucide-react'
 import {
   Container,
   DataUser,
@@ -47,7 +52,7 @@ export function IssueDetails() {
 
         <Infos>
           <Info>
-            <Github size={18} />
+            <LucideGitBranchPlus size={18} />
             {IssueDetails.username}
           </Info>
           <Info>
