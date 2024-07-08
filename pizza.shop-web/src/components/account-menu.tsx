@@ -32,7 +32,7 @@ export function AccountMenu() {
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="my-2" />
-        <DropdownMenuItem className="flex items-center p-1 pe-2 hover:rounded-sm hover:bg-gray-400/15 hover:outline-none">
+        <DropdownMenuItem className="flex items-center p-1 pe-2 hover:rounded-sm hover:bg-gray-500/50 hover:outline-none">
           <Building className="mr-2 h-4 w-4" />
           <span className="text-sm">Perfil da loja</span>
         </DropdownMenuItem>
