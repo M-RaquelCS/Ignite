@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { Button } from '../../components/ui/button'
@@ -27,8 +28,25 @@ export function SignIn() {
     resolver: zodResolver(schema),
   })
 
-  function onSubmit(values: z.infer<typeof schema>) {
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof schema>) {
+    try {
+      console.log(values)
+
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+
+      toast.success('Link de autenticação enviado!', {
+        description: 'Enviamos um link de autenticação para seu e-mail.',
+        action: {
+          label: 'Reenviar',
+          onClick: () => {},
+        },
+      })
+    } catch (err) {
+      toast.error('Uh oh! Credenciais inválidas', {
+        description:
+          'Não foi possível enviar o link de autenticação, por favor tente novamente',
+      })
+    }
   }
 
   return (
