@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { ThemeToggle } from '../../components/theme/theme-toggle'
 import { Button } from '../../components/ui/button'
 import {
   Form,
@@ -67,13 +68,12 @@ export function SignUp() {
     <>
       <Helmet title="Cadastro" />
       <div className="p-8">
-        <Button
-          variant={'secondary'}
-          asChild
-          className="absolute right-8 top-8"
-        >
-          <Link to={'/sign-in'}>Ir para login</Link>
-        </Button>
+        <div className="absolute right-8 top-8 flex items-center gap-2">
+          <Button variant={'secondary'} asChild>
+            <Link to={'/sign-in'}>Ir para login</Link>
+          </Button>
+          <ThemeToggle />
+        </div>
         <div className="flex w-[320px] flex-col justify-center gap-6">
           <div className="flex flex-col gap-2 text-center">
             <h1 className="text-2xl font-semibold tracking-tight">
