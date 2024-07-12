@@ -2,8 +2,11 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
 } from '@radix-ui/react-dropdown-menu'
+import { useQueries } from '@tanstack/react-query'
 import { Building, ChevronDown, LogOut } from 'lucide-react'
 
+import { getManagedRestaurant } from '../api/profile/get-managed-restaurant'
+import { getProfile } from '../api/profile/get-profile'
 import { Button } from './ui/button'
 import {
   DropdownMenu,
@@ -13,6 +16,19 @@ import {
 } from './ui/dropdown-menu'
 
 export function AccountMenu() {
+  const { '0': profile, '1': managedRestaurant } = useQueries({
+    queries: [
+      {
+        queryKey: ['profile'],
+        queryFn: getProfile,
+      },
+      {
+        queryKey: ['managed-restaurant'],
+        queryFn: getManagedRestaurant,
+      },
+    ],
+  })
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -20,15 +36,15 @@ export function AccountMenu() {
           variant={'outline'}
           className="flex select-none items-center gap-2"
         >
-          Pizza Shop
+          {managedRestaurant.data?.name}
           <ChevronDown className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56 p-3">
         <DropdownMenuLabel className="flex flex-col">
-          <span className="text-sm">Raquel Santos</span>
+          <span className="text-sm">{profile.data?.name}</span>
           <span className="text-xs font-normal text-muted-foreground">
-            raquel.santos@outlook.com.br
+            {profile.data?.email}
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="my-2" />
