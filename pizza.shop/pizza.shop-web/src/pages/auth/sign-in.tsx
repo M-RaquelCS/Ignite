@@ -1,10 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { signIn } from '../../api/auth/sign-in'
 import { ThemeToggle } from '../../components/theme/theme-toggle'
 import { Button } from '../../components/ui/button'
 import {
@@ -29,13 +31,21 @@ const schema = z.object({
 export function SignIn() {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      email: '',
+    },
   })
 
-  async function onSubmit(values: z.infer<typeof schema>) {
-    try {
-      console.log(values)
+  // mutation => é qualquer ação é uma não é uma ação que listagem, de retorno
+  // ex: get -> buscar dados
+  const { mutateAsync: authenticate } = useMutation({
+    mutationFn: signIn,
+  })
 
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+  async function onSubmit({ email }: z.infer<typeof schema>) {
+    try {
+      // sign-in process
+      await authenticate({ email })
 
       toast.success('Link de autenticação enviado!', {
         description: 'Enviamos um link de autenticação para seu e-mail.',
