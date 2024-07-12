@@ -1,4 +1,4 @@
-import { UtensilsCrossed } from 'lucide-react'
+import { TicketX } from 'lucide-react'
 
 import {
   Card,
@@ -14,7 +14,7 @@ export function MonthOrdersCanceledAmount() {
         <CardTitle className="text-base font-semibold">
           Pedidos Cancelados (mensal)
         </CardTitle>
-        <UtensilsCrossed className="h-4 w-4 text-muted-foreground" />
+        <TicketX className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent className="space-y-1 p-3 pt-0">
         <span className="text-2xl font-bold tracking-tight">46</span>

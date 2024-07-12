@@ -1,4 +1,4 @@
-import { UtensilsCrossed } from 'lucide-react'
+import { TicketPlus } from 'lucide-react'
 
 import {
   Card,
@@ -14,7 +14,7 @@ export function DayOrdersAmountCard() {
         <CardTitle className="text-base font-semibold">
           Pedidos (diário)
         </CardTitle>
-        <UtensilsCrossed className="h-4 w-4 text-muted-foreground" />
+        <TicketPlus className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent className="space-y-1 p-3 pt-0">
         <span className="text-2xl font-bold tracking-tight"> 56</span>
