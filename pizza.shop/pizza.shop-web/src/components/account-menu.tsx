@@ -2,9 +2,10 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
 } from '@radix-ui/react-dropdown-menu'
-import { useQueries } from '@tanstack/react-query'
+import { useMutation, useQueries } from '@tanstack/react-query'
 import { Building, ChevronDown, LogOut } from 'lucide-react'
 
+import { signOut } from '../api/auth/sign-out'
 import { getManagedRestaurant } from '../api/profile/get-managed-restaurant'
 import { getProfile } from '../api/profile/get-profile'
 import { Button } from './ui/button'
@@ -28,6 +29,15 @@ export function AccountMenu() {
       },
     ],
   })
+
+  const { mutateAsync: logout } = useMutation({
+    mutationFn: signOut,
+  })
+
+  async function handlerLogOut() {
+    await logout()
+    window.location.href = '/'
+  }
 
   return (
     <DropdownMenu>
@@ -53,7 +63,10 @@ export function AccountMenu() {
           <span className="text-sm">Perfil da loja</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator className="my-2" />
-        <DropdownMenuItem className="flex items-center p-1 pe-2 text-rose-500 hover:rounded-sm hover:bg-red-400/15 hover:outline-none dark:text-rose-400">
+        <DropdownMenuItem
+          className="flex items-center p-1 pe-2 text-rose-500 hover:rounded-sm hover:bg-red-400/15 hover:outline-none dark:text-rose-400"
+          onClick={() => handlerLogOut()}
+        >
           <LogOut className="mr-2 h-4 w-4" />
           <span className="text-sm">Sair</span>
         </DropdownMenuItem>
