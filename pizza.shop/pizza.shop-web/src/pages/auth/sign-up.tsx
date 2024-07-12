@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
@@ -6,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { signUpRestaurant } from '../../api/auth/sign-up-restaurant'
 import { ThemeToggle } from '../../components/theme/theme-toggle'
 import { Button } from '../../components/ui/button'
 import {
@@ -41,19 +43,34 @@ export function SignUp() {
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      restaurantName: '',
+      managerName: '',
+      phone: '',
+      email: '',
+    },
   })
 
-  async function onSubmit(values: z.infer<typeof schema>) {
-    try {
-      console.log(values)
+  const { mutateAsync: registerRestaurant } = useMutation({
+    mutationFn: signUpRestaurant,
+  })
 
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+  async function onSubmit({
+    restaurantName,
+    managerName,
+    email,
+    phone,
+  }: z.infer<typeof schema>) {
+    try {
+      // sign-up process
+      await registerRestaurant({ restaurantName, managerName, email, phone })
 
       toast.success('Cadastro concluído com sucesso!', {
         description: 'Por favor valide seu e-mail.',
         action: {
           label: 'Login',
-          onClick: () => navigate('/sign-in'),
+          onClick: () => navigate(`/sign-in?email=${email}`),
+          // passar como param o email cadastrado
         },
       })
     } catch (err) {
