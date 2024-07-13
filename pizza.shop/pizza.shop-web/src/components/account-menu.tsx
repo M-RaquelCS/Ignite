@@ -19,8 +19,12 @@ import {
 } from './ui/dropdown-menu'
 import { Skeleton } from './ui/skeleton'
 import { StoreProfile } from './update-store-profile'
+import { useNavigate } from 'react-router-dom'
 
 export function AccountMenu() {
+
+  const navigate = useNavigate()
+
   const { '0': profile, '1': managedRestaurant } = useQueries({
     queries: [
       {
@@ -38,14 +42,12 @@ export function AccountMenu() {
     ],
   })
 
-  const { mutateAsync: logout } = useMutation({
+  const { mutateAsync: logout, isPending } = useMutation({
     mutationFn: signOut,
+    onSuccess: () => {
+      navigate('/sign-in', { replace: true}) // substitue a rota
+    },
   })
-
-  async function handlerLogOut() {
-    await logout()
-    window.location.href = '/'
-  }
 
   return (
     <Dialog>
@@ -91,8 +93,9 @@ export function AccountMenu() {
 
           <DropdownMenuSeparator className="my-2" />
           <DropdownMenuItem
+            disabled={isPending}
             className="flex items-center p-1 pe-2 text-rose-500 hover:rounded-sm hover:bg-red-400/15 hover:outline-none dark:text-rose-400"
-            onClick={() => handlerLogOut()}
+            onClick={() => logout()}
           >
             <LogOut className="mr-2 h-4 w-4" />
             <span className="text-sm">Sair</span>
