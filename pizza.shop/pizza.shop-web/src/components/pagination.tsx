@@ -11,12 +11,14 @@ export interface PaginationProps {
   pageIndex: number // number of pages
   totalCount: number // total number of items
   perPage: number // number of items per page
+  onPageChange: (pageIndex: number) => Promise<void> | void
 }
 
 export function Pagination({
   pageIndex,
   perPage,
   totalCount,
+  onPageChange
 }: PaginationProps) {
   const pages = Math.ceil(totalCount / perPage) || 1
 
@@ -35,6 +37,7 @@ export function Pagination({
             size={'icon'}
             className="h-8 w-8 p-0"
             disabled={pageIndex === 0}
+            onClick={() => onPageChange(0)}
           >
             <ChevronsLeft className="h-4 w-4" />
             <span className="sr-only">Primeira página</span>
@@ -44,7 +47,7 @@ export function Pagination({
             size={'icon'}
             className="h-8 w-8 p-0"
             disabled={pageIndex === 0}
-            onClick={() => console.log(pageIndex - 1)}
+            onClick={() => onPageChange(pageIndex - 1)}
           >
             <ChevronLeft className="h-4 w-4" />
             <span className="sr-only">Página anterior</span>
@@ -53,8 +56,8 @@ export function Pagination({
             variant="outline"
             size={'icon'}
             className="h-8 w-8 p-0"
-            // disabled={pageIndex === 0} último index
-            onClick={() => console.log(pageIndex + 1)}
+            disabled={pages <= pageIndex + 1}
+            onClick={() => onPageChange(pageIndex + 1)}
           >
             <ChevronRight className="h-4 w-4" />
             <span className="sr-only">Próxima página</span>
@@ -62,7 +65,9 @@ export function Pagination({
           <Button
             variant="outline"
             size={'icon'}
-            className="h-8 w-8 p-0" // disabled={pageIndex === 0} último index
+            className="h-8 w-8 p-0" 
+            disabled={pages <= pageIndex + 1}
+            onClick={() => onPageChange(pages - 1)}
           >
             <ChevronsRight className="h-4 w-4" />
             <span className="sr-only">Última página</span>

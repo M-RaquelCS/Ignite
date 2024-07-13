@@ -24,9 +24,18 @@ export function Orders() {
     .parse(searchParams.get('page') ?? '1')
 
   const { data: result } = useQuery({
-    queryKey: ['orders'],
-    queryFn: () => getOrders({ pageIndex })
+    queryKey: ['orders', pageIndex],
+    queryFn: () => getOrders({ pageIndex }),
+
   })
+
+  function handlePaginate(pageIndex: number){
+    setSearchParams(prev => {
+      prev.set('page', (pageIndex + 1).toString())
+
+      return prev
+    })
+  }
 
   return (
     <>
@@ -61,7 +70,8 @@ export function Orders() {
             <Pagination 
               pageIndex={result.data.meta.pageIndex} 
               perPage={result.data.meta.perPage} 
-              totalCount={result.data.meta.totalCount} 
+              totalCount={result.data.meta.totalCount}
+              onPageChange={handlePaginate}
             />
           )}
         </div>
