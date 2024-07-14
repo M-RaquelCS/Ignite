@@ -8,6 +8,7 @@ import { Dialog, DialogTrigger } from '../../../components/ui/dialog'
 import { TableCell, TableRow } from '../../../components/ui/table'
 import { OrderDetails } from './order-details'
 import { OrderStatus } from '../../../components/status'
+import { useState } from 'react'
 
 interface OrderTableRowProps {
   order: {
@@ -20,10 +21,13 @@ interface OrderTableRowProps {
 }
 
 export function OrderTableRow({ order }: OrderTableRowProps) {
+
+  const [showDetails, setShowDetails] = useState(false)
+
   return (
     <TableRow>
       <TableCell>
-        <Dialog>
+        <Dialog open={showDetails} onOpenChange={setShowDetails}>
           <DialogTrigger asChild>
             <Button variant={'outline'} size={'icon'}>
               <Search className="h-4 w-4" />
@@ -31,7 +35,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
               <span className="sr-only">Detalhes do pedido</span>
             </Button>
           </DialogTrigger>
-          <OrderDetails />
+          <OrderDetails open={showDetails} orderId={order.orderId} />
         </Dialog>
       </TableCell>
       <TableCell className="font-mono text-xs font-medium">
