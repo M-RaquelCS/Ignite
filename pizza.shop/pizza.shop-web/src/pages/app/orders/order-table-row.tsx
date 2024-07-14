@@ -10,9 +10,10 @@ import { OrderDetails } from './order-details'
 import { OrderStatus } from '../../../components/status'
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { cancelOrder } from '../../../api/orders/cancel-orders'
+
 import { queryClient } from '../../../lib/react-query'
 import { GetOrdersResponse } from '../../../api/orders/get-orders'
+import { cancelOrder } from '../../../api/orders/status/cancel-orders'
 
 interface OrderTableRowProps {
   order: {
@@ -28,32 +29,36 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
 
   const [showDetails, setShowDetails] = useState(false)
 
-  const { mutateAsync: cancelFn } = useMutation({
-    mutationFn: cancelOrder,
+  function UpdateOrderStatusOnCache(orderId: string, status: OrderStatus) {
     // percorrer toda a lista de pedido, e quando encontrar o pedido com o ID
     // igual do que recebeu a ação cancelar, e alterar o status se não encontrar,
     // retorna o pedido sem alterar o status
-    async onSuccess(_, { orderId }){
-      const ordersListCache = queryClient.getQueriesData<GetOrdersResponse>({
-        queryKey: ['orders'],
-      })
+    const ordersListCache = queryClient.getQueriesData<GetOrdersResponse>({
+      queryKey: ['orders'],
+    })
 
-      ordersListCache.forEach(([cacheKey, cacheData]) => {
-        if (!cacheData || !cacheData.orders) {
-          return
-        }
+    ordersListCache.forEach(([cacheKey, cacheData]) => {
+      if (!cacheData) {
+        return
+      }
 
-        queryClient.setQueryData<GetOrdersResponse>(cacheKey, {
-          ...cacheData,
-          orders: cacheData.orders.map( order => {
-            if ( order.orderId === orderId ) {
-              return {...order, status: 'canceled' }
-            }
+      queryClient.setQueryData<GetOrdersResponse>(cacheKey, {
+        ...cacheData,
+        orders: cacheData.orders?.map( order => {
+          if ( order.orderId === orderId ) {
+            return {...order, status }
+          }
 
-            return order
-          })
+          return order
         })
       })
+    })
+  }
+
+  const { mutateAsync: cancelFn } = useMutation({
+    mutationFn: cancelOrder,
+    async onSuccess(_, { orderId }){
+      UpdateOrderStatusOnCache(orderId, 'canceled')
     }
   })
 
