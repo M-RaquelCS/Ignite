@@ -18,6 +18,9 @@ export interface GetOrdersDetailsResponse {
       id: string
       priceInCents: number
       quantity: number
+      product: {
+          name: string;
+      };
   }[];
 }
 
