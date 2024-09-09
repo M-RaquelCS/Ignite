@@ -8,6 +8,7 @@ import {
 } from '../../../components/ui/card'
 import { getMonthCanceledOrdersAmount } from '../../../api/dashboard/get-month-canceled-orders-amount'
 import { useQuery } from '@tanstack/react-query'
+import { MetricCardSkeleton } from './loading/metric-card-skeleton'
 
 export function MonthOrdersCanceledAmount() {
 
@@ -25,7 +26,7 @@ export function MonthOrdersCanceledAmount() {
         <TicketX className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent className="space-y-1 p-3 pt-0">
-        {monthOrdersCanceledAmount && (
+        {monthOrdersCanceledAmount ? (
           <>
             <span className="text-2xl font-bold tracking-tight">{monthOrdersCanceledAmount.amount.toLocaleString('pt-BR')}</span>
             <p className="text-xs text-muted-foreground">
@@ -42,6 +43,8 @@ export function MonthOrdersCanceledAmount() {
               )}
             </p>
           </>
+        ): (
+          <MetricCardSkeleton />
         )}
       </CardContent>
     </Card>

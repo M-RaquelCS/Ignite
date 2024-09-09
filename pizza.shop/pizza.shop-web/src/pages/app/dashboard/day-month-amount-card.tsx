@@ -8,6 +8,7 @@ import {
 } from '../../../components/ui/card'
 import { useQuery } from '@tanstack/react-query'
 import { getDayOrdersAmount } from '../../../api/dashboard/get-day-orders-amount'
+import { MetricCardSkeleton } from './loading/metric-card-skeleton'
 
 export function DayOrdersAmountCard() {
 
@@ -25,7 +26,7 @@ export function DayOrdersAmountCard() {
         <TicketPlus className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent className="space-y-1 p-3 pt-0">
-        {dayOrdersAmount && (
+        {dayOrdersAmount ? (
           <>
             <span className="text-2xl font-bold tracking-tight">{dayOrdersAmount.amount.toLocaleString('pt-BR')}</span>
             <p className="text-xs text-muted-foreground">
@@ -42,6 +43,8 @@ export function DayOrdersAmountCard() {
               )}
             </p>
           </>
+        ) : (
+          <MetricCardSkeleton />
         )}
         
       </CardContent>
