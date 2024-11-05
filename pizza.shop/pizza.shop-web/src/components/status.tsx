@@ -1,4 +1,9 @@
-export type OrderStatus = "pending" | "canceled" | "processing" | "delivering" | "delivered"
+export type OrderStatus =
+  | 'pending'
+  | 'canceled'
+  | 'processing'
+  | 'delivering'
+  | 'delivered'
 
 interface OrderStatusProps {
   status: OrderStatus
@@ -27,7 +32,9 @@ export function OrderStatus({ status }: OrderStatusProps) {
       {status === 'delivered' && (
         <span className="h-2 w-2 rounded-full bg-emerald-500" />
       )}
-      <span className="font-medium text-muted-foreground">{orderStatusMap[status]}</span>
+      <span className="font-medium text-muted-foreground">
+        {orderStatusMap[status]}
+      </span>
     </div>
   )
 }

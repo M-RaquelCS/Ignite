@@ -22,7 +22,6 @@ import { StoreProfile } from './update-store-profile'
 import { useNavigate } from 'react-router-dom'
 
 export function AccountMenu() {
-
   const navigate = useNavigate()
 
   const { '0': profile, '1': managedRestaurant } = useQueries({
@@ -30,11 +29,13 @@ export function AccountMenu() {
       {
         queryKey: ['profile'],
         queryFn: getProfile,
+        // biome-ignore lint/style/useNumberNamespace: <explanation>
         staleTime: Infinity,
       },
       {
         queryKey: ['managed-restaurant'],
         queryFn: getManagedRestaurant,
+        // biome-ignore lint/style/useNumberNamespace: <explanation>
         staleTime: Infinity,
         // não recarregar informações toda vez que a aba ficar em foco novamente,
         // vamos configurar para recarregar apenas quando houver alteração
@@ -45,7 +46,7 @@ export function AccountMenu() {
   const { mutateAsync: logout, isPending } = useMutation({
     mutationFn: signOut,
     onSuccess: () => {
-      navigate('/sign-in', { replace: true}) // substitue a rota
+      navigate('/sign-in', { replace: true }) // substitue a rota
     },
   })
 
