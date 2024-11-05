@@ -4,7 +4,6 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from 'lucide-react'
-
 import { Button } from './ui/button'
 
 export interface PaginationProps {
@@ -18,7 +17,7 @@ export function Pagination({
   pageIndex,
   perPage,
   totalCount,
-  onPageChange
+  onPageChange,
 }: PaginationProps) {
   const pages = Math.ceil(totalCount / perPage) || 1
 
@@ -65,7 +64,7 @@ export function Pagination({
           <Button
             variant="outline"
             size={'icon'}
-            className="h-8 w-8 p-0" 
+            className="h-8 w-8 p-0"
             disabled={pages <= pageIndex + 1}
             onClick={() => onPageChange(pages - 1)}
           >
