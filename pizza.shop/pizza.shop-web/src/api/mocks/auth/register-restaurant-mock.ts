@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw'
-import type { SignUpRestaurantBody } from '../auth/sign-up-restaurant'
+import type { SignUpRestaurantBody } from '../../auth/sign-up-restaurant'
 
 export const registerRestaurantMock = http.post<never, SignUpRestaurantBody>(
   '/restaurants',
