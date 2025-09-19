@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import { getCssText } from "../../stitches.config";
+import { getCssText } from "./styles";
 import { globalStyles } from "./styles/global";
 
 const roboto = Roboto({
@@ -13,12 +13,13 @@ export const metadata: Metadata = {
   description: "Generated on Ignite module 04",
 };
 
+globalStyles();
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  globalStyles();
   return (
     <html lang="en">
       <head>
