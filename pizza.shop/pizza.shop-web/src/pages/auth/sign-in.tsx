@@ -44,16 +44,16 @@ export function SignIn() {
     mutationFn: signIn,
   })
 
-  async function onSubmit({ email }: z.infer<typeof schema>) {
+  async function onSubmit(data: z.infer<typeof schema>) {
     try {
       // sign-in process
-      await authenticate({ email })
+      await authenticate({ email: data.email })
 
       toast.success('Link de autenticação enviado!', {
         description: 'Enviamos um link de autenticação para seu e-mail.',
         action: {
           label: 'Reenviar',
-          onClick: () => {},
+          onClick: () => SignIn(),
         },
       })
     } catch (err) {

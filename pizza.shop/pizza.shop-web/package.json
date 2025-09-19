@@ -48,6 +48,7 @@
     "@biomejs/biome": "1.9.4",
     "@eslint/compat": "^1.2.2",
     "@eslint/js": "^9.13.0",
+    "@playwright/test": "^1.55.0",
     "@rocketseat/eslint-config": "^2.2.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",

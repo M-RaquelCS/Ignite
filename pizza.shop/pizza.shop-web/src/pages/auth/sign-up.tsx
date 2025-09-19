@@ -189,10 +189,12 @@ export function SignUp() {
 
               <p className="px-6 text-center text-xs leading-relaxed text-muted-foreground">
                 Ao continuar, você concorda com nossos{' '}
+                {/* biome-ignore lint/a11y/useValidAnchor: <explanation> */}
                 <a href="" className="underline underline-offset-4">
                   Termos de serviço
                 </a>{' '}
                 e{' '}
+                {/* biome-ignore lint/a11y/useValidAnchor: <explanation> */}
                 <a href="" className="underline underline-offset-4">
                   políticas de privacidade
                 </a>
