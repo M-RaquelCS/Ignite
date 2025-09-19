@@ -14,6 +14,7 @@ import { approveOrderMock } from './orders/status/approve-orders-mock'
 import { cancelOrderMock } from './orders/status/cancel-orders-mock'
 import { deliverOrderMock } from './orders/status/deliver-order-mock'
 import { dispatchOrderMock } from './orders/status/dispatch-order-mock'
+import { getManagedRestaurantMock } from './profile/get-managed-restaurant-mock'
 import { getProfileMock } from './profile/get-profile-mock'
 import { updateProfileMock } from './profile/update-profile-mock'
 
@@ -33,7 +34,8 @@ export const worker = setupWorker(
   deliverOrderMock,
   dispatchOrderMock,
   updateProfileMock,
-  getProfileMock
+  getProfileMock,
+  getManagedRestaurantMock
 )
 
 export async function enableWorker() {
