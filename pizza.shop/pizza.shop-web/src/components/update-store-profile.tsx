@@ -5,8 +5,8 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 
 import {
+  type GetManagedRestaurantResponseBody,
   getManagedRestaurant,
-  GetManagedRestaurantResponseBody,
 } from '../api/profile/get-managed-restaurant'
 import { putProfileRestaurant } from '../api/profile/put-profile-restaurant'
 import { Button } from './ui/button'
@@ -41,7 +41,7 @@ export function StoreProfile() {
   const { data } = useQuery({
     queryKey: ['managed-restaurant'],
     queryFn: getManagedRestaurant,
-    staleTime: Infinity,
+    staleTime: Number.POSITIVE_INFINITY,
   })
 
   const form = useForm<z.infer<typeof storeProfileSchema>>({
