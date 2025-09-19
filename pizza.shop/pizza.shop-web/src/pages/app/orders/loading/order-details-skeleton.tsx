@@ -57,7 +57,8 @@ export function OrderDetailsSkeleton () {
         <TableBody>
           {Array.from({ length: 2 }).map((_, i) => {
             return (
-              <TableRow key={i}>
+              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+<TableRow key={i}>
                 <TableCell>
                   <Skeleton className="h-5 w-[140px]" />
                 </TableCell>

@@ -15,8 +15,8 @@ test('sign up successfully', async ({ page }) => {
   await page.getByRole('button', { name: 'Finalizar cadastro' }).click()
   const toast = page.getByText('Cadastro concluído com sucesso!')
 
-  expect(toast).toBeVisible()
-  await page.waitForTimeout(2000)
+  await expect(toast).toBeVisible()
+  // await page.waitForTimeout(2000)
 })
 
 test('sign up with error', async ({ page }) => {
@@ -34,7 +34,7 @@ test('sign up with error', async ({ page }) => {
   await page.getByRole('button', { name: 'Finalizar cadastro' }).click()
   const toast = page.getByText('Uh oh! Error ao efetuar ao cadastro.')
 
-  expect(toast).toBeVisible()
+  await expect(toast).toBeVisible()
 })
 
 test('navigate to login page', async ({ page }) => {

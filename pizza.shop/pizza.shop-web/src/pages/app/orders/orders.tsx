@@ -1,5 +1,9 @@
 import { Helmet } from 'react-helmet-async'
 
+import { useQuery } from '@tanstack/react-query'
+import { useSearchParams } from 'react-router-dom'
+import { z } from 'zod'
+import { getOrders } from '../../../api/orders/get-orders'
 import { Pagination } from '../../../components/pagination'
 import {
   Table,
@@ -8,13 +12,9 @@ import {
   TableHeader,
   TableRow,
 } from '../../../components/ui/table'
+import { OrderTableSkeleton } from './loading/order-table-skeleton'
 import { OrderTableFilters } from './order-table-filters'
 import { OrderTableRow } from './order-table-row'
-import { useQuery } from '@tanstack/react-query'
-import { getOrders } from '../../../api/orders/get-orders'
-import { useSearchParams } from 'react-router-dom'
-import { z } from 'zod'
-import { OrderTableSkeleton } from './loading/order-table-skeleton'
 
 export function Orders() {
 
