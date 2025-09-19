@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import { getCssText } from "../../stitches.config";
+import { globalStyles } from "./styles/global";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -16,8 +18,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  globalStyles();
   return (
     <html lang="en">
+      <head>
+        {/** biome-ignore lint/correctness/useUniqueElementIds: <explanation> */}
+        {/** biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
+        <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssText() }} />
+      </head>
       <body className={`${roboto.variable}`}>
         {children}
       </body>
