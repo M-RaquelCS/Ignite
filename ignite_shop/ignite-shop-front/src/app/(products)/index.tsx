@@ -1,17 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
 import { useKeenSlider } from "keen-slider/react";
-import { getProducts } from "@/app/api/home/get-products";
+import Image from "next/image";
+import { HomeContainer, ProductContainer } from "@/styles/pages/home";
 
 interface ProductsProps {
   products: {
     id: string;
     name: string;
     imageUrl: string;
-    price: number;
-  }[]
+    price: string;
+  }[] | undefined
 }
 
-export default function Products() {
+export default function Products({ products }: ProductsProps) {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
@@ -19,42 +19,18 @@ export default function Products() {
     }
   })
 
-  const { data: products } = useQuery({
-    queryKey: ['products'],
-    queryFn: getProducts
-  })
+  return (
+    <HomeContainer ref={sliderRef} className="keen-slider">
+      {products?.map(product => (
+        <ProductContainer key={product.id} className="keen-slider__slide">
+          <Image src={product.imageUrl} width={520} height={480} alt="" />
 
-  return <h1>Products Page</h1>;
+          <footer>
+            <strong>{product.name}</strong>
+            <span>{product.price}</span>
+          </footer>
+        </ProductContainer>
+      ))}
+    </HomeContainer>
+  )
 }
-
-// HomeContainer ref={sliderRef} className="keen-slider">
-//       {/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
-//       <ProductContainer className="keen-slider__slide">
-//         <Image src={tshirt1} width={520} height={480} alt="T-Shirt 1" />
-//         <footer>
-//           <strong>T-Shirt 1</strong>
-//           <span>R$ 79,90</span>
-//         </footer>
-//       </ProductContainer>
-//       <ProductContainer className="keen-slider__slide">
-//         <Image src={tshirt2} width={520} height={480} alt="T-Shirt 2" />
-//         <footer>
-//           <strong>T-Shirt 2</strong>
-//           <span>R$ 79,90</span>
-//         </footer>
-//       </ProductContainer>
-//       <ProductContainer className="keen-slider__slide">
-//         <Image src={tshirt3} width={520} height={480} alt="T-Shirt 3" />
-//         <footer>
-//           <strong>T-Shirt 3</strong>
-//           <span>R$ 79,90</span>
-//         </footer>
-//       </ProductContainer>
-//       <ProductContainer className="keen-slider__slide">
-//         <Image src={tshirt4} width={520} height={480} alt="T-Shirt 4" />
-//         <footer>
-//           <strong>T-Shirt 4</strong>
-//           <span>R$ 79,90</span>
-//         </footer>
-//       </ProductContainer>
-//     </HomeContainer>
