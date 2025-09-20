@@ -4,7 +4,6 @@ import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 
 export const getProduct = async (productId: string) => {
-	console.log(productId);
 	const product = await stripe.products.retrieve(productId, {
 		expand: ["default_price"],
 	});
@@ -20,8 +19,6 @@ export const getProduct = async (productId: string) => {
 		}).format((price.unit_amount ?? 0) / 100),
 		description: product.description,
 	};
-
-	console.log(response);
 
 	return response;
 };
