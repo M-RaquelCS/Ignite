@@ -25,7 +25,7 @@ export default function Products({ products }: ProductsProps) {
       {products?.map(product => (
         <Link href={`/products/${product.id}`} key={product.id} prefetch={false}>
           <ProductsContainer className="keen-slider__slide">
-            <Image src={product.imageUrl} width={520} height={480} alt="" />
+            <Image src={product.imageUrl} width={520} height={480} alt="" priority />
 
             <footer>
               <strong>{product.name}</strong>

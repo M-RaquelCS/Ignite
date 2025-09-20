@@ -15,7 +15,6 @@ export function ProductContent({ slug }: ProductContentProps){
     queryKey: ['productId'],
     queryFn: () => getProduct(slug),
   })
-  console.log(data)
 
   return (
     <ProductContainer>
@@ -26,6 +25,7 @@ export function ProductContent({ slug }: ProductContentProps){
             width={520}
             height={480}
             alt={data.name ?? 'Product image'}
+            priority
           />
         )}
       </ImageContainer>
