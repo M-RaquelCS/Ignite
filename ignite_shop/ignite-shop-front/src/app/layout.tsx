@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Container } from "@/styles/pages/app";
 import { getCssText } from "../styles";
 import { globalStyles } from "../styles/global";
+import { ReactQueryProvider } from "./providers/ReactQueryProvider";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 };
  
 globalStyles();
+
 
 export default function RootLayout({
   children,
@@ -30,8 +32,10 @@ export default function RootLayout({
         <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssText() }} />
       </head>
       <Container className={`${roboto.variable}`}>
-        <Header />
-        {children}
+        <ReactQueryProvider>
+          <Header />
+          {children}
+        </ReactQueryProvider>
       </Container>
     </html>
   );
