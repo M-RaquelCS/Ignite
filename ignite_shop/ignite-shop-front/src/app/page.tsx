@@ -3,16 +3,16 @@
 import 'keen-slider/keen-slider.min.css'
 
 import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "@/app/api/home/get-products";
+import { getAllProducts } from "@/_lib/products/get-all-products";
 
-import Products from "./(products)";
+import Products from "./(products)/page";
 
 
 export default function Home() {
 
   const { data: products } = useQuery({
     queryKey: ['products'],
-    queryFn: getProducts
+    queryFn: getAllProducts
   })
 
   return (

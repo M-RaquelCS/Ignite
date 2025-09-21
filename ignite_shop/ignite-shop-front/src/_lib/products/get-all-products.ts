@@ -1,9 +1,9 @@
 "use server";
 
 import type Stripe from "stripe";
-import { stripe } from "@/lib/stripe";
+import { stripe } from "@/_lib/stripe";
 
-export const getProducts = async () => {
+export const getAllProducts = async () => {
 	const response = await stripe.products.list({
 		expand: ["data.default_price"],
 	});

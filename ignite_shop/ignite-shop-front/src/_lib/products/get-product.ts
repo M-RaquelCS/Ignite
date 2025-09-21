@@ -8,7 +8,6 @@ export const getProduct = async (productId: string) => {
 		expand: ["default_price"],
 	});
 	const price = product.default_price as Stripe.Price;
-
 	const response = {
 		id: product.id,
 		name: product.name,
@@ -18,6 +17,7 @@ export const getProduct = async (productId: string) => {
 			currency: "BRL",
 		}).format((price.unit_amount ?? 0) / 100),
 		description: product.description,
+		defaultPriceId: price.id,
 	};
 
 	return response;
