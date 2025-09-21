@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import { Header } from "@/app/(products)/_components/Header";
+import { Header } from "@/components/Header";
 import { Container } from "@/styles/pages/app";
-import { ReactQueryProvider } from "../_providers/ReactQueryProvider";
+import { ReactQueryProvider } from "../providers/ReactQueryProvider";
 import { getCssText } from "../styles";
 import { globalStyles } from "../styles/global";
 

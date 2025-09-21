@@ -1,4 +1,4 @@
-export default function Home() {
+export default function Success() {
   return (
     <h1>success</h1>
   );

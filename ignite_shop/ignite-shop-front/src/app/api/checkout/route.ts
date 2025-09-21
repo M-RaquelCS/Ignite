@@ -1,7 +1,7 @@
 "use server";
 
 import { NextResponse } from "next/server";
-import { stripe } from "@/_lib/stripe";
+import { stripe } from "@/lib/stripe";
 import { env } from "@/utils/env";
 
 export async function POST(request: Request) {

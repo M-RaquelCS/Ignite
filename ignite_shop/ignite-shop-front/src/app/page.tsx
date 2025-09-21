@@ -3,7 +3,7 @@
 import 'keen-slider/keen-slider.min.css'
 
 import { useQuery } from "@tanstack/react-query";
-import { getAllProducts } from "@/_lib/products/get-all-products";
+import { getAllProducts } from "@/services/stripe/products/get-all-products";
 
 import Products from "./(products)/page";
 

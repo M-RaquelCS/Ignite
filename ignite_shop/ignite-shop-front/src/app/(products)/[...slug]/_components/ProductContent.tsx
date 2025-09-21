@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
-import { getProduct } from "@/_lib/products/get-product";
+import { getProduct } from "@/services/stripe/products/get-product";
 import { ImageContainer, ProductContainer, ProductDetails } from "@/styles/pages/product";
 
 
