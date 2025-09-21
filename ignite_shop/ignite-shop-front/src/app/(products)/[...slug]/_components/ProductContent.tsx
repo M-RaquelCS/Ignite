@@ -28,9 +28,15 @@ export function ProductContent({ slug }: ProductContentProps){
 
   async function handleByProduct(){
     try{
-      const response = await axios.post('/api/checkout')
+      const response = await axios.post('/api/checkout', {
+        priceId: data?.defaultPriceId
+      })
+      const { checkoutUrl } = response.data
+      window.location.href = checkoutUrl
+
     } catch (err){
       // Conectar com uma ferramenta de observabilidade
+      console.log(err)
       alert('Falha ao redirecionar ao checkout!')
     }
   }  
