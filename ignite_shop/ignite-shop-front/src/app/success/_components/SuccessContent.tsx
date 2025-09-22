@@ -29,6 +29,7 @@ export function SuccessContent({ session_id }: SuccessContentProps){
     <>
     <Head>
       <title>Success | Ignite Shop</title>
+      <meta name="robots" content="noindex" />
     </Head>
       <SuccessContainer>
         <h1>Compra efetuada</h1>
