@@ -1,22 +1,13 @@
-import Link from "next/link";
-import { ImageContainer, SuccessContainer } from "@/styles/pages/success";
+import { SuccessContent } from "./_components/SuccessContent";
 
-export default function Success() {
+export default async function Success({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const session_id = (await searchParams).session_id
+  
   return (
-    <SuccessContainer>
-      <h1>Compra efetuada</h1>
-
-      <ImageContainer>
-
-      </ImageContainer>
-
-      <p>
-        Uhuul <strong>Diego Fernandes</strong>, sua <strong>Camiseta Beyond the Limits</strong> já está a caminho da sua casa.
-      </p>
-
-      <Link href="/">
-        Voltar ao catálogo
-      </Link>
-    </SuccessContainer>
+    <SuccessContent session_id={session_id}  />
   )
 }
