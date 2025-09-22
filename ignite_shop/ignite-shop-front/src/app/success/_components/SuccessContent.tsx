@@ -29,7 +29,10 @@ export function SuccessContent({ session_id }: SuccessContentProps){
       <h1>Compra efetuada</h1>
 
       <ImageContainer>
-        <Image src={data?.product.imageUrl || ""} width={120} height={110} alt=""/>
+        {data && (
+          <Image src={data.product.imageUrl || ""} width={120} height={110} alt=""/>
+        )}
+        
       </ImageContainer>
 
       <p>
