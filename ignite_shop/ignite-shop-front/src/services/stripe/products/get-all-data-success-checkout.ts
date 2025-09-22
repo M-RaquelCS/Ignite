@@ -1,5 +1,6 @@
 "use server";
 
+import { permanentRedirect } from "next/navigation";
 import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 
@@ -7,7 +8,7 @@ export const getAllDataSuccessCheckout = async (
 	session_id: string | string[] | undefined,
 ) => {
 	if (typeof session_id !== "string") {
-		throw new Error("Invalid session_id: must be a string");
+		permanentRedirect("/");
 	}
 
 	const session = await stripe.checkout.sessions.retrieve(session_id, {
