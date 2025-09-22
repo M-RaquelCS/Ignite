@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import Head from "next/head";
 import Image from "next/image";
 import { getProduct } from "@/services/stripe/products/get-product";
 import { ImageContainer, ProductContainer, ProductDetails } from "@/styles/pages/product";
@@ -42,25 +43,32 @@ export function ProductContent({ slug }: ProductContentProps){
   }  
 
   return (
-    <ProductContainer>
-      <ImageContainer>
-        {data && (
-          <Image
-            src={data.imageUrl}
-            width={520}
-            height={480}
-            alt={data.name ?? 'Product image'}
-            priority
-          />
-        )}
-      </ImageContainer>
-      <ProductDetails>
-        <h1>{data?.name || ""}</h1>
-        <span>{data?.price || ""}</span>
+    <>
+    <Head>
+      {data && (
+        <title>{data.name} | Ignite Shop</title>
+      )}
+    </Head>
+      <ProductContainer>
+        <ImageContainer>
+          {data && (
+            <Image
+              src={data.imageUrl}
+              width={520}
+              height={480}
+              alt={data.name ?? 'Product image'}
+              priority
+            />
+          )}
+        </ImageContainer>
+        <ProductDetails>
+          <h1>{data?.name || ""}</h1>
+          <span>{data?.price || ""}</span>
 
-        <p>{data?.description || ""}</p>
-        <button type="button" onClick={handleByProduct}>Comprar agora</button>
-      </ProductDetails>
-    </ProductContainer>
+          <p>{data?.description || ""}</p>
+          <button type="button" onClick={handleByProduct}>Comprar agora</button>
+        </ProductDetails>
+      </ProductContainer>
+    </>
   )
 }
